@@ -7,8 +7,8 @@ class Auth_model extends CI_Model
     {
         // User data array
         $data = array(
-            'username' => $this->input->post('username'),
-            'name' => $this->input->post('username'),
+            'username' => $this->input->post('fname'),
+            'name' => $this->input->post('fname'),
             'email' => $this->input->post('email'),
             'password' => $enc_password,
             'image' => 'default.jpg',
@@ -19,16 +19,15 @@ class Auth_model extends CI_Model
         return $this->db->insert('users', $data);
     }
 
-    public function login($username, $password)
+    public function login($email)
     {
         // Validate
-        $this->db->where('username', $username);
-        $this->db->where('password', $password);
+        $this->db->where('email', $email);
 
         $result = $this->db->get('users');
 
         if($result->num_rows() == 1) {
-            return $result->row(0)->user_id;
+            return $result->row_array();
         } else {
             return false;
         }

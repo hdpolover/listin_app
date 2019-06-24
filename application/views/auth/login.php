@@ -22,10 +22,10 @@
 
                   <form class="user" method="post" action="<?php echo base_url('auth/login'); ?>">
                     <div class="form-group">
-                      <input type="text" name="username"class="form-control form-control-user" id="username" placeholder="Username">
+                      <input type="email" name="email" class="form-control form-control-user" id="email" placeholder="Email" required>
                     </div>
                     <div class="form-group">
-                      <input type="password" name="password" class="form-control form-control-user" id="password" placeholder="Password">
+                      <input type="password" name="password" class="form-control form-control-user" id="password" placeholder="Password" required>
                     </div>
                     <button type="submit" class="btn btn-primary btn-user btn-block">
                                 Login

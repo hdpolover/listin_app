@@ -18,22 +18,24 @@ class User extends CI_Controller
     public function blank()
     {
         $data['title'] = 'Blank';
+        $data['user'] = $this->user_model->getUserData();
    
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar');
-        $this->load->view('templates/topbar');
-        $this->load->view('user/blank');
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('user/blank', $data);
         $this->load->view('templates/footer');
     }
     
     public function profile()
     {
         $data['title'] = 'My Profile';
-
+        $data['user'] = $this->user_model->getUserData();
+   
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar');
-        $this->load->view('templates/topbar');
-        $this->load->view('user/profile');
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('user/profile', $data);
         $this->load->view('templates/footer');
     }
 
