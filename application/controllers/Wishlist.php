@@ -27,4 +27,16 @@ class Wishlist extends CI_Controller
         $this->load->view('wishlist/create');
         $this->load->view('templates/footer');
     }
+
+    public function viewAll()
+    {
+        $data['title'] = 'View plans';
+        $data['user'] = $this->user_model->getUserData();
+   
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('wishlist/all');
+        $this->load->view('templates/footer');
+    }
 }

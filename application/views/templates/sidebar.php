@@ -29,7 +29,7 @@
 
 <!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item">
-  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+  <a class="nav-link collapsed" href="<?php echo base_url('wishlist/viewAll'); ?>" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
     <i class="fas fa-fw fa-clipboard-list"></i>
     <span>My Wishlists</span>
   </a>
@@ -37,7 +37,7 @@
     <div class="bg-white py-2 collapse-inner rounded">
       <a class="collapse-item" href="buttons.html"><i class="fas fa-fw fa-check"></i>&nbsp;On Going</a>
       <a class="collapse-item" href="cards.html">Completed</a>
-      <a class="collapse-item" href="cards.html">Cancelled</a>
+      <a class="collapse-item" href="<?php echo base_url('wishlist/viewAll'); ?>">Cancelled</a>
     </div>
   </div>
 </li>
