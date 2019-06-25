@@ -48,6 +48,27 @@
   <!-- Custom scripts for all pages-->
   <script src="<?php echo base_url('assets/'); ?>js/sb-admin-2.min.js"></script>
 
+  <!-- date picker -->
+  <script src="<?php echo base_url('assets/'); ?>vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+  <!-- currency formatter -->
+  <script src="<?php echo base_url('assets/'); ?>js/pcsFormatNumber.jquery.js"></script>
+
+  <script>
+    $('#period').datepicker({
+    format: 'mm/dd/yyyy',
+    startDate: '-3d'
+ });
+
+ $('#est_cost').pcsFormatNumber({
+  decimal_separator: ".",
+  number_separator: ",",
+  currency: "Rp. ",
+  to_fixed: 2
+});
+
+  </script>
+
 </body>
 
 </html>

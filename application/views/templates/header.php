@@ -18,6 +18,9 @@
   <!-- Custom styles for this template-->
   <link href="<?php echo base_url('assets/'); ?>css/sb-admin-2.min.css" rel="stylesheet">
 
+  <!-- css date picker -->
+  <link href="<?php echo base_url('assets/'); ?>vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" rel="stylesheet" type="text/css">
+
 </head>
 
 <body id="page-top">
