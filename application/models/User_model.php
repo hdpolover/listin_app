@@ -7,7 +7,7 @@ class User_model extends CI_Model
     {
         $result = $this->db->get_where('users', ['username' => $this->session->userdata('username')]);
 
-        if($result->num_rows() == 1) {
+        if ($result->num_rows() == 1) {
             return $result->row_array();
         } else {
             return false;
