@@ -55,16 +55,15 @@
       <script src="<?php echo base_url('assets/'); ?>js/pcsFormatNumber.jquery.js"></script>
 
       <script>
-        $('#period').datepicker({
-          format: 'mm/dd/yyyy',
-          startDate: '-3d'
+        $('#goal_date').datepicker({
+          format: 'yyyy-mm-dd',
+          startDate: '+1d'
         });
 
         $('#est_cost').pcsFormatNumber({
           decimal_separator: ".",
           number_separator: ",",
-          currency: "Rp.",
-          to_fixed: 2
+          currency: "Rp."
         });
       </script>
 
