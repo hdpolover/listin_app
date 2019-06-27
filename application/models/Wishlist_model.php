@@ -33,4 +33,60 @@ class Wishlist_model extends CI_Model
             return false;
         }
     }
+
+    public function getOngoingPlans()
+    {
+        $this->db->where('status', 'on_going');
+        $this->db->where('user_id', $this->session->userdata('user_id'));
+
+        $result = $this->db->get('lists');
+
+        if ($result->num_rows() > 0) {
+            return $result->result_array();
+        } else {
+            return false;
+        }
+    }
+
+    public function getCompletedPlans()
+    {
+        $this->db->where('status', 'completed');
+        $this->db->where('user_id', $this->session->userdata('user_id'));
+
+        $result = $this->db->get('lists');
+
+        if ($result->num_rows() > 0) {
+            return $result->result_array();
+        } else {
+            return false;
+        }
+    }
+
+    public function getCancelledPlans()
+    {
+        $this->db->where('status', 'cancelled');
+        $this->db->where('user_id', $this->session->userdata('user_id'));
+
+        $result = $this->db->get('lists');
+
+        if ($result->num_rows() > 0) {
+            return $result->result_array();
+        } else {
+            return false;
+        }
+    }
+
+    public function getListDetails($list_id)
+    {
+        $this->db->where('list_id', $list_id);
+        $this->db->where('user_id', $this->session->userdata('user_id'));
+
+        $result = $this->db->get('lists');
+
+        if ($result->num_rows() == 1) {
+            return $result->row_array();
+        } else {
+            return false;
+        }
+    }
 }

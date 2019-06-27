@@ -28,7 +28,7 @@
 
          <?php echo $this->session->flashdata('message'); ?>
 
-         <form method="post" action="<?= base_url('wishlist/add'); ?>">
+         <form method="post" action="<?= base_url('wishlist/create_plan'); ?>">
            <div class="form-group row">
              <label for="title" class="col-sm-2 col-form-label">Title</label>
              <div class="col-sm-10">
@@ -50,7 +50,7 @@
            <div class="form-group row">
              <label for="goal_date" class="col-sm-2 col-form-label">Goal Date</label>
              <div class="col-sm-10">
-               <input type="text" name="goal_date" class="form-control" id="goal_date" placeholder="dd-mm-yyyy" value="<?= set_value('goal_date'); ?>"/>
+               <input type="text" name="goal_date" class="form-control" id="goal_date" placeholder="dd-mm-yyyy" value="<?= set_value('goal_date'); ?>" />
              </div>
            </div>
            <div class="form-group row">
@@ -103,56 +103,6 @@
              </div>
            </div>
          </form>
-       </div>
-     </div>
-
-     <div class="card shadow mb-4">
-       <!-- Card Header - Accordion -->
-       <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-         <h6 class="m-0 font-weight-bold text-primary">Collapsable Card Example</h6>
-       </a>
-       <!-- Card Content - Collapse -->
-       <div class="collapse show" id="collapseCardExample" style="">
-         <div class="card-body">
-           This is a collapsable card example using Bootstrap's built in collapse functionality. <strong>Click on the card header</strong> to see the card body collapse and expand!
-         </div>
-       </div>
-       <a href="#collapseCardExample1" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-         <h6 class="m-0 font-weight-bold text-primary">Collapsable Card Example</h6>
-       </a>
-       <!-- Card Content - Collapse -->
-       <div class="collapse" id="collapseCardExample1" style="">
-         <div class="card-body">
-           <div class="row">
-
-             <!-- Earnings (Monthly) Card Example -->
-             <div class="col-lg-6">
-               <div class="card border-left-primary shadow h-100 py-2">
-                 <div class="card-body">
-                   <div class="row no-gutters align-items-center">
-                     <div class="col mr-2">
-                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Earnings (Monthly)</div>
-                       <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                     </div>
-                     <div class="col-auto">
-                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                     </div>
-                   </div>
-                 </div>
-               </div>
-             </div>
-
-             <!-- Earnings (Monthly) Card Example -->
-             <div class="col-lg-6">
-               <div class="card bg-primary text-white shadow h-100 py-2">
-                 <div class="card-body">
-                   Primary
-                   <div class="text-white-50 small">#4e73df</div>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
        </div>
      </div>
 

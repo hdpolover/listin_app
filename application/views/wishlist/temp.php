@@ -6,7 +6,8 @@
      <h1 class="h3 mb-0 text-gray-800"><?php echo $title; ?></h1>
    </div>
    <div class="container-fluid">
-     <?php var_dump($lists); ?>
+     
+
    </div>
  </div>
  <!-- /.container-fluid -->

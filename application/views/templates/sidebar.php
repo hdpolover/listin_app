@@ -27,6 +27,12 @@
     Features
   </div>
 
+  <li class="nav-item ">
+    <a class="nav-link" href="<?php echo base_url('wishlist') ?>">
+      <i class="fas fa-fw fa-tachometer-alt"></i>
+      <span>My Wishlists</span></a>
+  </li>
+
   <!-- Nav Item - Pages Collapse Menu -->
   <li class="nav-item">
     <a class="nav-link collapsed" href="<?php echo base_url('wishlist/viewAll'); ?>" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">

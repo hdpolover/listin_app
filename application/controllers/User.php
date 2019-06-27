@@ -8,19 +8,25 @@ class User extends CI_Controller
     {
         $data['title'] = 'Dashboard';
         $data['user'] = $this->user_model->getUserData();
-   
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('user/new', $data);
+        //check if user has wishlists
+        $data['plans'] = $this->wishlist_model->getPlans();
+        if ($data['plans'] == false) {
+            $this->load->view('user/index', $data);
+        } else {
+            $this->load->view('user/dashboard', $data);
+        }
         $this->load->view('templates/footer');
     }
-    
+
     public function profile()
     {
         $data['title'] = 'My Profile';
         $data['user'] = $this->user_model->getUserData();
-   
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);

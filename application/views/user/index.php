@@ -9,7 +9,7 @@
   <p>
     You don't have any plans yet. Start saving now.
   </p>
-  <a href="<?php echo base_url('wishlist/create'); ?>" class="btn btn-primary"><i class="fas fa-fw fa-plus-circle"></i></a>
+  <a href="<?php echo base_url('wishlist/choose_plan'); ?>" class="btn btn-primary"><i class="fas fa-fw fa-plus-circle"></i></a>
 </div>
 </div>
 <!-- /.container-fluid -->
