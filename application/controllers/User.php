@@ -8,6 +8,7 @@ class User extends CI_Controller
     {
         $data['title'] = 'Dashboard';
         $data['user'] = $this->user_model->getUserData();
+        $data['wallet_value'] = $this->getWallet();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -43,5 +44,14 @@ class User extends CI_Controller
         $this->load->view('templates/topbar');
         $this->load->view('user/new');
         $this->load->view('templates/footer');
+    }
+
+    public function getWallet() {
+        $wallet_value = $this->wallet_model->getWalletValue();
+        if ($wallet_value['sum(detail_amount)'] != null) {
+            return $wallet_value['sum(detail_amount)'];
+        } else {
+            return "0,00";
+        }
     }
 }

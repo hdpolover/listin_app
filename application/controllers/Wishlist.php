@@ -8,6 +8,7 @@ class Wishlist extends CI_Controller
     {
         $data['title'] = 'My Wishlists';
         $data['user'] = $this->user_model->getUserData();
+        $data['wallet_value'] = $this->getWallet();
         $data['lists'] = $this->wishlist_model->getPlans();
         $data['ongoing'] = $this->wishlist_model->getOngoingPlans();
         $data['completed'] = $this->wishlist_model->getCompletedPlans();
@@ -25,6 +26,7 @@ class Wishlist extends CI_Controller
     {
         $data['title'] = 'My Wishlists / List Details';
         $data['user'] = $this->user_model->getUserData();
+        $data['wallet_value'] = $this->getWallet();
         $data['list_details'] = $this->wishlist_model->getListDetails($list_id);
 
         $this->load->view('templates/header', $data);
@@ -33,11 +35,12 @@ class Wishlist extends CI_Controller
         $this->load->view('wishlist/view_list_details', $data);
         $this->load->view('templates/footer');
     }
-    
+
     public function choose_plan()
     {
         $data['title'] = 'Choose a plan';
         $data['user'] = $this->user_model->getUserData();
+        $data['wallet_value'] = $this->getWallet();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -92,6 +95,7 @@ class Wishlist extends CI_Controller
 
                 $data['title'] = 'Create a new plan';
                 $data['user'] = $this->user_model->getUserData();
+                $data['wallet_value'] = $this->getWallet();
 
                 $this->load->view('templates/header', $data);
                 $this->load->view('templates/sidebar', $data);
@@ -109,7 +113,7 @@ class Wishlist extends CI_Controller
                 $this->session->set_flashdata('message', '<div class ="alert alert-success" 
                 style="text-align-center" role ="alert">
             Congratulations! You successfully created a new plan.</div>');
-                redirect('wishlist/all');
+                redirect('wishlist');
             }
         }
     }
@@ -118,8 +122,10 @@ class Wishlist extends CI_Controller
     {
         $data['title'] = 'Save for your plan';
         $data['user'] = $this->user_model->getUserData();
+        $data['wallet_value'] = $this->getWallet();
         $data['id'] = $list_id;
-        
+        $data['list_details'] = $this->wishlist_model->getListDetails($list_id);
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -127,98 +133,28 @@ class Wishlist extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function create()
+    public function pay_plan($list_id)
     {
-        $data['title'] = 'Create a new plan';
-        $data['user'] = $this->user_model->getUserData();
+        $list_details = $this->wishlist_model->getListDetails($list_id);
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('wishlist/create');
-        $this->load->view('templates/footer');
-    }
+        //data needed for payment
+        $data['list_id'] = $list_details['list_id'];
+        $data['detail_amount'] = $list_details['save_amount'];
+        $data['payment_date'] = $this->getExactTodayDate();
 
-    public function viewAll()
-    {
-        $data['title'] = 'View plans';
-        $data['user'] = $this->user_model->getUserData();
-        $data['lists'] = $this->wishlist_model->getPlans();
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('wishlist/all', $data);
-        $this->load->view('templates/footer');
-    }
-
-    public function show()
-    {
-        // var_dump($this->input->post());
-
-        $title = $this->input->post('title');
-        $description = $this->input->post('description');
-        //omit Rp. from the input
-        //$est_cost = $this->convToNum(substr($this->input->post('est_cost'), 4));
-        //echo $est_cost." ";
-        // $goal_date = $this->input->post('goal_date');
-        // $save_freq = $this->input->post('save_freq');
-
-
-        // //get today's date
-        // $offset = 7 * 60 * 60; //converting 5 hours to seconds.
-        // $dateFormat = "d-m-Y";
-        // $timeNdate = gmdate($dateFormat, time() + $offset);
-
-        // //get the interval between the input and today
-        // $datetime1 = new DateTime($goal_date);
-        // $datetime2 = new DateTime($timeNdate);
-        // $interval = $datetime2->diff($datetime1)->days;
-        // var_dump($goal_date, $timeNdate, $interval);
-
-        $today = date('d-m-Y');
-
-        $goal_date = $this->input->post('goal_date');
-        //get the interval between the input and today
-        $datetime1 = new DateTime($goal_date);
-        $datetime2 = new DateTime($today);
-        $interval = $datetime2->diff($datetime1)->days;
-        var_dump($goal_date, $today, $interval);
-
-
-        // if ($save_freq == "option4") {
-        //     $freq_num = $this->input->post('freq_num');
-        //     $freq_period = $this->input->post('freq_period');
-        //     $save_freq = $freq_num * $freq_period;
-        // }
-
-        // if ($interval < $save_freq) {
-        //     echo "You can't";
-        // } else {
-        //     echo "you can</br>";
-        //     $total_save = $interval / $save_freq;
-        //     $remaining = $interval % $save_freq;
-        //     echo "so ".$interval."/".$save_freq."=".round($total_save)."</br>";
-        //     echo "remainng days = ".$remaining;
-        //     $save_amount = $est_cost / $total_save;
-        //     echo "</br>you need to save ".$save_amount." every ".$save_freq." days.";
-
-        // }
-
-
-        // var_dump($est_cost, $period, $save_freq, $date);
-
-        // $data['title'] = 'View plans';
-        // $data['user'] = $this->user_model->getUserData();
+        $this->wallet_model->insertPayment($data);
 
         // $this->load->view('templates/header', $data);
         // $this->load->view('templates/sidebar', $data);
         // $this->load->view('templates/topbar', $data);
-        // $this->load->view('wishlist/all');
+        // $this->load->view('wishlist/save_plan', $data);
         // $this->load->view('templates/footer');
-    }
 
-    
+        $this->session->set_flashdata('message', '<div class ="alert alert-success" 
+                style="text-align-center" role ="alert">
+            Payment successful!.</div>');
+        redirect('wishlist');
+    }
 
     public function convToNum($input)
     {
@@ -248,5 +184,15 @@ class Wishlist extends CI_Controller
         $now = gmdate($dateFormat, time() + $offset);
 
         return $now;
+    }
+
+    public function getWallet()
+    {
+        $wallet_value = $this->wallet_model->getWalletValue();
+        if ($wallet_value['sum(detail_amount)'] != null) {
+            return $wallet_value['sum(detail_amount)'];
+        } else {
+            return "0,00";
+        }
     }
 }

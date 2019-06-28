@@ -29,8 +29,14 @@
 
   <li class="nav-item ">
     <a class="nav-link" href="<?php echo base_url('wishlist') ?>">
-      <i class="fas fa-fw fa-tachometer-alt"></i>
+      <i class="fas fa-fw fa-list-alt"></i>
       <span>My Wishlists</span></a>
+  </li>
+
+  <li class="nav-item ">
+    <a class="nav-link" href="<?php echo base_url('wallet') ?>">
+      <i class="fas fa-fw fa-wallet"></i>
+      <span>My Wallet</span></a>
   </li>
 
   <!-- Nav Item - Pages Collapse Menu -->

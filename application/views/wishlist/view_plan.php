@@ -11,7 +11,11 @@
        </a>
      </div>
    </div>
+
    <div class="container-fluid">
+
+     <?php echo $this->session->flashdata('message'); ?>
+     
      <div class="card shadow mb-4">
 
        <!-- Card Header - Accordion -->
@@ -30,29 +34,33 @@
        <!-- Card Content - Collapse -->
        <div class="collapse show" id="collapseOngoing" style="">
          <div class="card-body">
-           <?php foreach ($ongoing as $value) { ?>
-             <div class="card bg-primary text-white shadow h-100 py-2">
-               <div class="card-body">
-                 <div class="row">
-                   <div class="container">
-                     <?php echo $value['description']; ?>
+           <?php if ($ongoing == false) { ?>
+             <div class="align-items-center">No plans recorded yet.</div>
+           <?php } else { ?>
+             <?php foreach ($ongoing as $value) { ?>
+               <div class="card bg-primary text-white shadow h-100 py-2">
+                 <div class="card-body">
+                   <div class="row">
+                     <div class="container">
+                       <?php echo $value['description']; ?>
+                     </div>
                    </div>
-                 </div>
-                 <br>
-                 <div class="row">
-                   <div class="col-lg-12">
-                     <div class="text-right">
-                       <a class="btn btn-info" href="<?php echo base_url('wishlist/save_plan/' . $value['list_id']); ?>" style="text-decoration: none;">
-                         Save now </a>
-                       <a class="btn btn-info" href="<?php echo base_url('wishlist/view_list_details/' . $value['list_id']); ?>" style="text-decoration: none;">
-                         View plan details
-                       </a>
+                   <br>
+                   <div class="row">
+                     <div class="col-lg-12">
+                       <div class="text-right">
+                         <a class="btn btn-info" href="<?php echo base_url('wishlist/save_plan/' . $value['list_id']); ?>" style="text-decoration: none;">
+                           Save now </a>
+                         <a class="btn btn-info" href="<?php echo base_url('wishlist/view_list_details/' . $value['list_id']); ?>" style="text-decoration: none;">
+                           View plan details
+                         </a>
+                       </div>
                      </div>
                    </div>
                  </div>
                </div>
-             </div>
-             <br>
+               <br>
+             <?php }; ?>
            <?php }; ?>
          </div>
        </div>
@@ -72,16 +80,20 @@
        <!-- Card Content - Collapse -->
        <div class="collapse" id="collapseCompleted" style="">
          <div class="card-body">
-           <?php foreach ($completed as $value) { ?>
-             <a href="<?php echo base_url('wishlist/view_list_details/' . $value['list_id']); ?>" style="text-decoration: none;">
-               <div class="card bg-success text-white shadow h-100 py-2">
-                 <div class="card-body">
-                   <div>
-                     <?php echo $value['description']; ?>
+           <?php if ($completed == false) { ?>
+             <div class="align-items-center">No plans recorded yet.</div>
+           <?php } else { ?>
+             <?php foreach ($completed as $value) { ?>
+               <a href="<?php echo base_url('wishlist/view_list_details/' . $value['list_id']); ?>" style="text-decoration: none;">
+                 <div class="card bg-success text-white shadow h-100 py-2">
+                   <div class="card-body">
+                     <div>
+                       <?php echo $value['description']; ?>
+                     </div>
                    </div>
                  </div>
-               </div>
-             </a><br>
+               </a><br>
+             <?php }; ?>
            <?php }; ?>
          </div>
        </div>

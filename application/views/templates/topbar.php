@@ -161,7 +161,7 @@
             <div class="card mr+6 bg-primary text-white shadow">
               <div class="card-body" style="padding: .8vw;">
                 <i class="fas fa-coins fa-fw"></i>
-                 Rp. 9.000.000,00
+                Rp. <?php echo $wallet_value; ?>
               </div>
             </div>
           </a>

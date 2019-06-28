@@ -7,17 +7,20 @@
      </div>
      <div class="container-fluid">
          <div class="card shadow mb-4">
-             <div class="card-header py-3">
-                 <div class="row">
-                     <div class="col-lg-8">
-                         <h5 class="m-0 font-weight-bold text-primary">
-                             <?php echo $list_details['title']; ?>
-                         </h5>
-                     </div>
-                     <div class="col-lg-4">
-                         <h6 style="text-align:right;">
-                             Created on <?php echo $list_details['created_on']; ?>
-                         </h6>
+             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                 <h5 class="m-0 font-weight-bold text-primary">
+                     <?php echo $list_details['title']; ?>
+                 </h5>
+                 <div class="dropdown no-arrow">
+                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                     </a>
+                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                         <div class="dropdown-header">Dropdown Header:</div>
+                         <a class="dropdown-item" href="#">Action</a>
+                         <a class="dropdown-item" href="#">Another action</a>
+                         <div class="dropdown-divider"></div>
+                         <a class="dropdown-item" href="#">Something else here</a>
                      </div>
                  </div>
              </div>
@@ -65,11 +68,23 @@
                                      <input type="text" name="save_amount" class="form-control" id="save_amount" placeholder="Rp. <?php echo $list_details['save_amount']; ?>" disabled>
                                  </div>
                              </div>
-                                 <div class="text-right">
-                                     <a class="btn btn-info" href="<?php echo base_url('wishlist/save_plan/' . $list_details['list_id']); ?>" style="text-decoration: none; width: 50%;">
-                                         Save now </a>
-                                 </div>
+                             <div class="text-align">
+                                 <h6>
+                                     Created on <?php echo $list_details['created_on']; ?>
+                                 </h6>
+                             </div>
                          </form>
+                     </div>
+                 </div>
+                 <div class="row">
+                     <div class="col-lg-3">
+                     </div>
+                     <div class="col-lg-6">
+                         <a class="btn btn-info" href="<?php echo base_url('wishlist/save_plan/' . $list_details['list_id']); ?>" style="text-decoration: none; width: 100%;">
+                             Save now </a>
+                     </div>
+                     <div class="col-lg-3">
+
                      </div>
                  </div>
              </div>
