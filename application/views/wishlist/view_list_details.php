@@ -10,15 +10,14 @@
              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                  <h5 class="m-0 font-weight-bold text-primary">
                      <?php echo $list_details['title']; ?>
+                     <?php echo $list_details['list_id']; ?>
                  </h5>
                  <div class="dropdown no-arrow">
                      <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                          <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                      </a>
                      <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                         <div class="dropdown-header">Dropdown Header:</div>
-                         <a class="dropdown-item" href="#">Action</a>
-                         <a class="dropdown-item" href="#">Another action</a>
+                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#cancelPlanModal">Cancel plan</a>
                          <div class="dropdown-divider"></div>
                          <a class="dropdown-item" href="#">Something else here</a>
                      </div>
@@ -90,6 +89,40 @@
              </div>
          </div>
 
+         <!-- History -->
+         <div class="card shadow mb-4">
+             <div class="card-header py-3">
+                 <h6 class="m-0 font-weight-bold text-primary">History</h6>
+             </div>
+             <div class="card-body">
+                 <?php if ($list_id_details == false) { ?>
+                     <div class="align-items-center">No tansactions yet. </div>
+                 <?php } else { ?>
+                     <table class="table table-striped">
+                         <thead>
+                             <tr>
+                                 <th scope="col">No. </th>
+                                 <th scope="col">Transaction Date</th>
+                                 <th scope="col">Detail Amount</th>
+                                 <th scope="col">Action</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             <?php $index = 1; ?>
+                             <?php foreach ($list_id_details as $value) { ?>
+                                 <tr>
+                                     <th scope="row"><?php echo $index; ?></th>
+                                     <td><?php echo $value['tr_date']; ?></td>
+                                     <td>Rp. <?php echo $value['detail_amount']; ?></td>
+                                     <td><?php echo $value['action']; ?></td>
+                                     <?php $index++; ?>
+                                 </tr>
+                             <?php }; ?>
+                         </tbody>
+                     </table>
+                 <?php }; ?>
+             </div>
+         </div>
      </div>
  </div>
  <!-- /.container-fluid -->

@@ -38,6 +38,25 @@
         </div>
       </div>
 
+      <!-- Cancel Plan Modal-->
+      <div class="modal fade" id="cancelPlanModal" tabindex="-1" role="dialog" aria-labelledby="cancelPlanModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="cancelPlanModalLabel">Are you sure?</h5>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">You are about to cancel this plan. All the deposits you made on this plan will be categorized as "others".</div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+              <a class="btn btn-danger" href="<?php echo base_url('wishlist/cancel_plan'); ?>">OK</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Bootstrap core JavaScript-->
       <script src="<?php echo base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
       <script src="<?php echo base_url('assets/'); ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -55,6 +74,11 @@
       <script src="<?php echo base_url('assets/'); ?>js/pcsFormatNumber.jquery.js"></script>
 
       <script>
+        $('.custom-file-input').on('change', function() {
+          let fileName = $(this).val().split('\\').pop();
+          $(this).next('.custom-file-label').addClass("selected").html(fileName);
+        });
+
         $('#goal_date').datepicker({
           format: 'yyyy-mm-dd',
           startDate: '+1d'

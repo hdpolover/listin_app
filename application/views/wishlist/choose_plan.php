@@ -18,7 +18,7 @@
                              Plan your save based on how often you want to. Be organized.
                          </div>
                          <div class="text-right">
-                             <a href="<?php echo base_url('wishlist/create'); ?>" class="btn btn-info">Choose this plan</a>
+                             <a href="<?php echo base_url('wishlist/create_plan'); ?>" class="btn btn-info">Choose this plan</a>
                          </div>
                      </div>
                  </div>

@@ -28,6 +28,7 @@ class Wishlist extends CI_Controller
         $data['user'] = $this->user_model->getUserData();
         $data['wallet_value'] = $this->getWallet();
         $data['list_details'] = $this->wishlist_model->getListDetails($list_id);
+        $data['list_id_details'] = $this->wishlist_model->getListIdDetails($list_id);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -57,7 +58,15 @@ class Wishlist extends CI_Controller
         $this->form_validation->set_rules('goal_date', 'Goal Date', 'required|trim');
 
         if ($this->form_validation->run() == false) {
-            redirect('wishlist/create_plan');
+            $data['title'] = 'Create a new plan';
+            $data['user'] = $this->user_model->getUserData();
+            $data['wallet_value'] = $this->getWallet();
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('wishlist/create');
+            $this->load->view('templates/footer');
         } else {
             $title = $this->input->post('title');
             $description = $this->input->post('description');
@@ -144,15 +153,36 @@ class Wishlist extends CI_Controller
 
         $this->wallet_model->insertPayment($data);
 
-        // $this->load->view('templates/header', $data);
-        // $this->load->view('templates/sidebar', $data);
-        // $this->load->view('templates/topbar', $data);
-        // $this->load->view('wishlist/save_plan', $data);
-        // $this->load->view('templates/footer');
+        $this->session->set_flashdata(
+            'message',
+            '<div class ="alert alert-success" style="text-align-center" role ="alert">
+            Payment successful! 
+            <a href="wishlist/view_list_details/' . $list_id . '">
+            See details.
+            </a>
+            </div>'
+        );
+        redirect('wishlist');
+    }
 
-        $this->session->set_flashdata('message', '<div class ="alert alert-success" 
-                style="text-align-center" role ="alert">
-            Payment successful!.</div>');
+    public function cancel_plan($list_id)
+    {
+        $list_details = $this->wishlist_model->getListDetails($list_id);
+
+        //data needed for payment
+        $data['list_id'] = $list_details['list_id'];
+
+        $this->wallet_model->insertPayment($data);
+
+        $this->session->set_flashdata(
+            'message',
+            '<div class ="alert alert-success" style="text-align-center" role ="alert">
+            Payment successful! 
+            <a href="wishlist/view_list_details/' . $list_id . '">
+            See details.
+            </a>
+            </div>'
+        );
         redirect('wishlist');
     }
 

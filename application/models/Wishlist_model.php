@@ -89,4 +89,17 @@ class Wishlist_model extends CI_Model
             return false;
         }
     }
+
+    public function getListIdDetails($list_id)
+    {
+        $this->db->where('list_id', $list_id);
+
+        $result = $this->db->get('list_details');
+
+        if ($result->num_rows() > 0) {
+            return $result->result_array();
+        } else {
+            return false;
+        }
+    }
 }

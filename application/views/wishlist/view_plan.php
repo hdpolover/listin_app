@@ -15,7 +15,7 @@
    <div class="container-fluid">
 
      <?php echo $this->session->flashdata('message'); ?>
-     
+
      <div class="card shadow mb-4">
 
        <!-- Card Header - Accordion -->
@@ -42,7 +42,7 @@
                  <div class="card-body">
                    <div class="row">
                      <div class="container">
-                       <?php echo $value['description']; ?>
+                       <?php echo $value['title']; ?>
                      </div>
                    </div>
                    <br>
