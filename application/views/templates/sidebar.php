@@ -53,19 +53,13 @@
       <span>My Profile</span></a>
   </li>
 
-  <!-- Nav Item - Pages Collapse Menu -->
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-      <i class="fas fa-fw fa-clipboard-list"></i>
-      <span>My Account</span>
-    </a>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item" href="buttons.html"><i class="fas fa-fw fa-check"></i>&nbsp;Profile</a>
-        <a class="collapse-item" href="cards.html">Completed</a>
-        <a class="collapse-item" href="<?php echo base_url('wishlist/viewAll'); ?>">Cancelled</a>
-      </div>
-    </div>
+  <!-- Divider -->
+  <hr class="sidebar-divider d-none d-md-block">
+
+  <li class="nav-item ">
+    <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
+      <i class="fas fa-sign-out-alt fa-fw"></i>
+      <span>Log out</span></a>
   </li>
 
   <!-- Divider -->

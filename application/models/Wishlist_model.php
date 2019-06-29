@@ -102,4 +102,23 @@ class Wishlist_model extends CI_Model
             return false;
         }
     }
+
+    public function insertListPayment($data)
+    {
+        $data = array(
+            'tr_date' => $data['payment_date'],
+            'detail_amount' => $data['detail_amount'],
+            'action' => "deposit",
+            'list_id' => $data['list_id']
+        );
+
+        $this->db->insert('list_details', $data);
+    }
+
+    public function cancelPlan($list_id)
+    {
+        $this->db->set('status', 'cancelled');
+        $this->db->where('list_id', $list_id);
+        $this->db->update('lists');
+    }
 }

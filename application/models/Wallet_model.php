@@ -3,18 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Wallet_model extends CI_Model
 {
-    public function insertPayment($data)
-    {
-        $data = array(
-            'tr_date' => $data['payment_date'],
-            'detail_amount' => $data['detail_amount'],
-            'action' => "deposit",
-            'list_id' => $data['list_id']
-        );
-
-        $this->db->insert('list_details', $data);
-    }
-
     public function getWalletValue()
     {
         $this->db->select('sum(detail_amount)');

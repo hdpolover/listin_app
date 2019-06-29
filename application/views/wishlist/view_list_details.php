@@ -12,16 +12,16 @@
                      <?php echo $list_details['title']; ?>
                      <?php echo $list_details['list_id']; ?>
                  </h5>
-                 <div class="dropdown no-arrow">
-                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                         <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                     </a>
-                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#cancelPlanModal">Cancel plan</a>
-                         <div class="dropdown-divider"></div>
-                         <a class="dropdown-item" href="#">Something else here</a>
+                 <?php if ($list_details['status'] == 'on_going') { ?>
+                     <div class="dropdown no-arrow">
+                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             <i class="fas fa-ellipsis-v fa-fw"></i>
+                         </a>
+                         <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#cancelPlanModal"><i class="fas fa-trash fw"></i> Cancel plan</a>
+                         </div>
                      </div>
-                 </div>
+                 <?php }; ?>
              </div>
              <div class="card-body">
                  <div class="row">
@@ -79,8 +79,14 @@
                      <div class="col-lg-3">
                      </div>
                      <div class="col-lg-6">
-                         <a class="btn btn-info" href="<?php echo base_url('wishlist/save_plan/' . $list_details['list_id']); ?>" style="text-decoration: none; width: 100%;">
-                             Save now </a>
+                         <?php if ($list_details['status'] == 'on_going') { ?>
+                             <a class="btn btn-info" href="<?php echo base_url('wishlist/save_plan/' . $list_details['list_id']); ?>" style="text-decoration: none; width: 100%;">
+                                 Save now </a>
+                         <?php } elseif ($list_details['status'] == 'completed') { ?>
+                             Completed
+                         <?php } elseif ($list_details['status'] == 'cancelled') { ?>
+                             Cancelled
+                         <?php }; ?>
                      </div>
                      <div class="col-lg-3">
 

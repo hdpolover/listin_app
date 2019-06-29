@@ -65,7 +65,7 @@ class Wishlist extends CI_Controller
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
-            $this->load->view('wishlist/create');
+            $this->load->view('wishlist/create_plan');
             $this->load->view('templates/footer');
         } else {
             $title = $this->input->post('title');
@@ -109,7 +109,7 @@ class Wishlist extends CI_Controller
                 $this->load->view('templates/header', $data);
                 $this->load->view('templates/sidebar', $data);
                 $this->load->view('templates/topbar', $data);
-                $this->load->view('wishlist/create');
+                $this->load->view('wishlist/create_plan');
                 $this->load->view('templates/footer');
             } else {
                 $plan_data = array(
@@ -151,7 +151,7 @@ class Wishlist extends CI_Controller
         $data['detail_amount'] = $list_details['save_amount'];
         $data['payment_date'] = $this->getExactTodayDate();
 
-        $this->wallet_model->insertPayment($data);
+        $this->wishlist_model->insertListPayment($data);
 
         $this->session->set_flashdata(
             'message',
@@ -167,17 +167,12 @@ class Wishlist extends CI_Controller
 
     public function cancel_plan($list_id)
     {
-        $list_details = $this->wishlist_model->getListDetails($list_id);
-
-        //data needed for payment
-        $data['list_id'] = $list_details['list_id'];
-
-        $this->wallet_model->insertPayment($data);
+        $this->wishlist_model->cancelPlan($list_id);
 
         $this->session->set_flashdata(
             'message',
             '<div class ="alert alert-success" style="text-align-center" role ="alert">
-            Payment successful! 
+            Plan cancelled.
             <a href="wishlist/view_list_details/' . $list_id . '">
             See details.
             </a>

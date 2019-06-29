@@ -51,7 +51,7 @@
             <div class="modal-body">You are about to cancel this plan. All the deposits you made on this plan will be categorized as "others".</div>
             <div class="modal-footer">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-              <a class="btn btn-danger" href="<?php echo base_url('wishlist/cancel_plan'); ?>">OK</a>
+              <a class="btn btn-danger" href="<?php echo base_url('wishlist/cancel_plan/' . $list_details['list_id']); ?>">OK</a>
             </div>
           </div>
         </div>

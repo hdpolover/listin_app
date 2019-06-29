@@ -35,7 +35,14 @@
        <div class="collapse show" id="collapseOngoing" style="">
          <div class="card-body">
            <?php if ($ongoing == false) { ?>
-             <div class="align-items-center">No plans recorded yet.</div>
+             <div class="container-fluid justify-content-center text-center">
+               <div class="text-center">
+                 <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 15rem;" src="<?php echo base_url('assets/img/svg/'); ?>undraw_no_data_qbuo.svg" alt="">
+               </div>
+               <p>
+                 No plans recorded yet.
+               </p>
+             </div>
            <?php } else { ?>
              <?php foreach ($ongoing as $value) { ?>
                <div class="card bg-primary text-white shadow h-100 py-2">
@@ -81,14 +88,33 @@
        <div class="collapse" id="collapseCompleted" style="">
          <div class="card-body">
            <?php if ($completed == false) { ?>
-             <div class="align-items-center">No plans recorded yet.</div>
+             <div class="container-fluid justify-content-center text-center">
+               <div class="text-center">
+                 <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 15rem;" src="<?php echo base_url('assets/img/svg/'); ?>undraw_no_data_qbuo.svg" alt="">
+               </div>
+               <p>
+                 No plans recorded yet.
+               </p>
+             </div>
            <?php } else { ?>
              <?php foreach ($completed as $value) { ?>
                <a href="<?php echo base_url('wishlist/view_list_details/' . $value['list_id']); ?>" style="text-decoration: none;">
                  <div class="card bg-success text-white shadow h-100 py-2">
                    <div class="card-body">
-                     <div>
-                       <?php echo $value['description']; ?>
+                     <div class="row">
+                       <div class="container">
+                         <?php echo $value['title']; ?>
+                       </div>
+                     </div>
+                     <br>
+                     <div class="row">
+                       <div class="col-lg-12">
+                         <div class="text-right">
+                           <a class="btn btn-info" href="<?php echo base_url('wishlist/view_list_details/' . $value['list_id']); ?>" style="text-decoration: none;">
+                             View plan details
+                           </a>
+                         </div>
+                       </div>
                      </div>
                    </div>
                  </div>
@@ -114,14 +140,33 @@
        <div class="collapse" id="collapseCancelled" style="">
          <div class="card-body">
            <?php if ($cancelled == false) { ?>
-             <div class="align-items-center">No plans recorded yet.</div>
+             <div class="container-fluid justify-content-center text-center">
+               <div class="text-center">
+                 <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 15rem;" src="<?php echo base_url('assets/img/svg/'); ?>undraw_no_data_qbuo.svg" alt="">
+               </div>
+               <p>
+                 No plans recorded yet.
+               </p>
+             </div>
            <?php } else { ?>
              <?php foreach ($cancelled as $value) { ?>
                <a href="<?php echo base_url('wishlist/view_list_details/' . $value['list_id']); ?>" style="text-decoration: none;">
                  <div class="card bg-danger text-white shadow h-100 py-2">
                    <div class="card-body">
-                     <div>
-                       <?php echo $value['description']; ?>
+                     <div class="row">
+                       <div class="container">
+                         <?php echo $value['title']; ?>
+                       </div>
+                     </div>
+                     <br>
+                     <div class="row">
+                       <div class="col-lg-12">
+                         <div class="text-right">
+                           <a class="btn btn-info" href="<?php echo base_url('wishlist/view_list_details/' . $value['list_id']); ?>" style="text-decoration: none;">
+                             View plan details
+                           </a>
+                         </div>
+                       </div>
                      </div>
                    </div>
                  </div>
