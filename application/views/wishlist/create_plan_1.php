@@ -9,14 +9,14 @@
      <div class="card shadow mb-4">
        <!-- Card Header - Dropdown -->
        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-         <h6 class="m-0 font-weight-bold text-primary">New Regular Saving plan</h6>
+         <h6 class="m-0 font-weight-bold text-primary">New Strict Saving plan</h6>
        </div>
        <!-- Card Body -->
        <div class="card-body">
 
          <?php echo $this->session->flashdata('message'); ?>
 
-         <form method="post" action="<?= base_url('wishlist/create_plan'); ?>">
+         <form method="post" action="<?= base_url('wishlist/create_plan_1'); ?>">
            <div class="form-group row">
              <label for="title" class="col-sm-2 col-form-label">Title</label>
              <div class="col-sm-10">

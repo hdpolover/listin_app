@@ -7,6 +7,7 @@ class Wallet extends CI_Controller
     {
         $data['title'] = 'My Wallet';
         $data['user'] = $this->user_model->getUserData();
+        $data['wallet_value'] = $this->getWallet();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);

@@ -89,6 +89,12 @@
           number_separator: ",",
           currency: "Rp."
         });
+
+        $('#save_flexible_amount').pcsFormatNumber({
+          decimal_separator: ".",
+          number_separator: ",",
+          currency: "Rp."
+        });
       </script>
 
       </body>

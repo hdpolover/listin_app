@@ -8,10 +8,17 @@
      <div class="container-fluid">
          <div class="card shadow mb-4">
              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                 <h5 class="m-0 font-weight-bold text-primary">
-                     <?php echo $list_details['title']; ?>
-                     <?php echo $list_details['list_id']; ?>
-                 </h5>
+                 <div class="col-lg-7">
+                     <h5 class="m-0 font-weight-bold text-primary">
+                         <?php echo $list_details['category']; ?> | <?php echo $list_details['title']; ?>
+                     </h5>
+                 </div>
+                 <div class="col-lg-4">
+                     <div class="text-right">
+                         Status: <?php echo $list_details['status']; ?>
+                     </div>
+                 </div>
+
                  <?php if ($list_details['status'] == 'on_going') { ?>
                      <div class="dropdown no-arrow">
                          <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -23,69 +30,100 @@
                      </div>
                  <?php }; ?>
              </div>
+
              <div class="card-body">
-                 <div class="row">
-                     <div class="col-lg-6">
-                         <form>
-                             <div class="form-group row">
-                                 <label for="description" class="col-sm-4 col-form-label">Description</label>
-                                 <div class="col-sm-8">
-                                     <textarea name="description" class="form-control" id="description" placeholder="<?php echo $list_details['description']; ?>" rows="3" disabled></textarea>
+                 <?php if ($list_details['category'] == 'strict') { ?>
+                     <div class="row">
+                         <div class="col-lg-6">
+                             <form>
+                                 <div class="form-group row">
+                                     <label for="description" class="col-sm-4 col-form-label">Description</label>
+                                     <div class="col-sm-8">
+                                         <textarea name="description" class="form-control" id="description" placeholder="<?php echo $list_details['description']; ?>" rows="3" disabled></textarea>
+                                     </div>
                                  </div>
-                             </div>
-                             <div class="form-group row">
-                                 <label for="esti_cost" class="col-sm-4 col-form-label">Estimated Cost</label>
-                                 <div class="col-sm-8">
-                                     <input type="text" name="esti_cost" class="form-control" id="esti_cost" placeholder="Rp. <?php echo $list_details['est_cost']; ?>" disabled>
+                                 <div class="form-group row">
+                                     <label for="esti_cost" class="col-sm-4 col-form-label">Estimated Cost</label>
+                                     <div class="col-sm-8">
+                                         <input type="text" name="esti_cost" class="form-control" id="esti_cost" placeholder="Rp. <?php echo $list_details['est_cost']; ?>" disabled>
+                                     </div>
                                  </div>
-                             </div>
-                             <div class="form-group row">
-                                 <label for="goal_dat" class="col-sm-4 col-form-label">Goal Date</label>
-                                 <div class="col-sm-8">
-                                     <input type="text" name="goal_dat" class="form-control" id="goal_dat" placeholder="<?php echo $list_details['goal_date']; ?>" disabled>
+                                 <div class="form-group row">
+                                     <label for="goal_dat" class="col-sm-4 col-form-label">Goal Date</label>
+                                     <div class="col-sm-8">
+                                         <input type="text" name="goal_dat" class="form-control" id="goal_dat" placeholder="<?php echo $list_details['goal_date']; ?> (<?php echo $day_interval; ?> day(s) left)" disabled>
+                                     </div>
                                  </div>
-                             </div>
-                         </form>
+                             </form>
+                         </div>
+                         <div class="col-lg-6">
+                             <form>
+                                 <div class="form-group row">
+                                     <label for="save_freq" class="col-sm-4 col-form-label">Saving Frequency</label>
+                                     <div class="col-sm-8">
+                                         <input type="text" name="save_freq" class="form-control" id="save_freq" placeholder="Every <?php echo $list_details['save_freq']; ?> day(s)" disabled>
+                                     </div>
+                                 </div>
+                                 <div class="form-group row">
+                                     <label for="sav_needed" class="col-sm-4 col-form-label">Saving Needed</label>
+                                     <div class="col-sm-8">
+                                         <input type="text" name="save_needed" class="form-control" id="save_needed" placeholder="<?php echo $list_details['trans_needed']; ?> more times" disabled>
+                                     </div>
+                                 </div>
+                                 <div class="form-group row">
+                                     <label for="save_amount" class="col-sm-4 col-form-label">Saving Amount</label>
+                                     <div class="col-sm-8">
+                                         <input type="text" name="save_amount" class="form-control" id="save_amount" placeholder="Rp. <?php echo $list_details['save_amount']; ?>" disabled>
+                                     </div>
+                                 </div>
+                                 <div class="text-align">
+                                     <h6>
+                                         Created on <?php echo $list_details['created_on']; ?>
+                                     </h6>
+                                 </div>
+                             </form>
+                         </div>
                      </div>
-                     <div class="col-lg-6">
-                         <form>
-                             <div class="form-group row">
-                                 <label for="save_freq" class="col-sm-4 col-form-label">Saving Frequency</label>
-                                 <div class="col-sm-8">
-                                     <input type="text" name="save_freq" class="form-control" id="save_freq" placeholder="<?php echo $list_details['save_freq']; ?>" disabled>
+                 <?php } else { ?>
+                     <div class="row">
+                         <div class="col-lg-6">
+                             <form>
+                                 <div class="form-group row">
+                                     <label for="description" class="col-sm-4 col-form-label">Description</label>
+                                     <div class="col-sm-8">
+                                         <textarea name="description" class="form-control" id="description" placeholder="<?php echo $list_details['description']; ?>" rows="3" disabled></textarea>
+                                     </div>
                                  </div>
-                             </div>
-                             <div class="form-group row">
-                                 <label for="sav_needed" class="col-sm-4 col-form-label">Saving Needed</label>
-                                 <div class="col-sm-8">
-                                     <input type="text" name="save_needed" class="form-control" id="save_needed" placeholder="<?php echo $list_details['trans_needed']; ?>" disabled>
+                                 <div class="form-group row">
+                                     <label for="esti_cost" class="col-sm-4 col-form-label">Estimated Cost</label>
+                                     <div class="col-sm-8">
+                                         <input type="text" name="esti_cost" class="form-control" id="esti_cost" placeholder="Rp. <?php echo $list_details['est_cost']; ?>" disabled>
+                                     </div>
                                  </div>
-                             </div>
-                             <div class="form-group row">
-                                 <label for="save_amount" class="col-sm-4 col-form-label">Saving Amount</label>
-                                 <div class="col-sm-8">
-                                     <input type="text" name="save_amount" class="form-control" id="save_amount" placeholder="Rp. <?php echo $list_details['save_amount']; ?>" disabled>
+                             </form>
+                         </div>
+                         <div class="col-lg-6">
+                             <form>
+                                 <div class="text-align">
+                                     <h6>
+                                         Created on <?php echo $list_details['created_on']; ?>
+                                     </h6>
                                  </div>
-                             </div>
-                             <div class="text-align">
-                                 <h6>
-                                     Created on <?php echo $list_details['created_on']; ?>
-                                 </h6>
-                             </div>
-                         </form>
+                             </form>
+                         </div>
                      </div>
-                 </div>
+                 <?php }; ?>
                  <div class="row">
                      <div class="col-lg-3">
                      </div>
                      <div class="col-lg-6">
                          <?php if ($list_details['status'] == 'on_going') { ?>
-                             <a class="btn btn-info" href="<?php echo base_url('wishlist/save_plan/' . $list_details['list_id']); ?>" style="text-decoration: none; width: 100%;">
+                             <a class="btn btn-primary" href="<?php echo base_url('wishlist/save_plan/' . $list_details['list_id']); ?>" style="text-decoration: none; width: 100%;">
                                  Save now </a>
                          <?php } elseif ($list_details['status'] == 'completed') { ?>
-                             Completed
+                             Completed on <?php echo $list_details['complete_or_cancel_date']; ?>
                          <?php } elseif ($list_details['status'] == 'cancelled') { ?>
-                             Cancelled
+                             Cancelled on <?php echo $list_details['complete_or_cancel_date']; ?>
                          <?php }; ?>
                      </div>
                      <div class="col-lg-3">
@@ -102,7 +140,14 @@
              </div>
              <div class="card-body">
                  <?php if ($list_id_details == false) { ?>
-                     <div class="align-items-center">No tansactions yet. </div>
+                     <div class="container-fluid justify-content-center text-center">
+                         <div class="text-center">
+                             <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 15rem;" src="<?php echo base_url('assets/img/svg/'); ?>undraw_empty_xct9.svg" alt="">
+                         </div>
+                         <p>
+                             No transactions yet.
+                         </p>
+                     </div>
                  <?php } else { ?>
                      <table class="table table-striped">
                          <thead>

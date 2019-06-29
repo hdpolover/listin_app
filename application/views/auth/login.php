@@ -12,7 +12,9 @@
             <!-- Nested Row within Card Body -->
             <div class="row">
               <div class="col-lg-6 d-none d-lg-block">
-            
+                <div class="text-center">
+                  <img class="img-fluid px-3 px-sm-4 mt-3 mb-1" src="<?php echo base_url('assets/img/svg/'); ?>undraw_mobile_login_ikmv.svg" alt="">
+                </div>
               </div>
               <div class="col-lg-6">
                 <div class="p-5">
@@ -30,12 +32,12 @@
                       <input type="password" name="password" class="form-control form-control-user" id="password" placeholder="Password" required>
                     </div>
                     <button type="submit" class="btn btn-primary btn-user btn-block">
-                                Login
-                </button>
+                      Login
+                    </button>
                   </form>
                   <hr>
                   <div class="text-center">
-                    <a class="small" href="<?php echo base_url('auth/register'); ?>">Create an Account!</a>
+                    <p>Haven't already registered? <span><a class="small" href="<?php echo base_url('auth/register'); ?>">Create an Account!</a></span></p>
                   </div>
                 </div>
               </div>

@@ -6,7 +6,11 @@
       <div class="card-body p-0">
         <!-- Nested Row within Card Body -->
         <div class="row">
-          <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+          <div class="col-lg-5 d-none d-lg-block">
+            <div class="text-center">
+              <img class="img-fluid px-3 mt-3" style="width: 100%; height: 100%; padding-top: 2vw;" src="<?php echo base_url('assets/img/svg/'); ?>undraw_press_play_bx2d.svg" alt="">
+            </div>
+          </div>
           <div class="col-lg-7">
             <div class="p-5">
               <div class="text-center">
@@ -14,11 +18,11 @@
               </div>
               <form class="user" method="post" action="<?php echo base_url('auth/register'); ?>">
                 <div class="form-group">
-                    <input type="text" class="form-control form-control-user" id="fname" name="fname" placeholder="Full Name">
+                  <input type="text" class="form-control form-control-user" id="fname" name="fname" placeholder="Full Name">
                 </div>
                 <div class="form-group">
                   <input type="email" class="form-control form-control-user" id="email" name="email" placeholder="Email Address" value="<?php echo set_value('email'); ?>">
-                    <?php echo form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
+                  <?php echo form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
@@ -30,12 +34,12 @@
                   </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-user btn-block">
-                                Register Account
+                  Register Account
                 </button>
               </form>
               <hr>
               <div class="text-center">
-                <a class="small" href="<?php echo base_url('auth/login'); ?>">Already have an account? Login!</a>
+                <p>Already have an account? <span><a class="small" href="<?php echo base_url('auth/login'); ?>">Login!</a></span></p>
               </div>
             </div>
           </div>

@@ -10,7 +10,7 @@
        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="<?php echo base_url('assets/img/svg/');?>undraw_savings_hjfl.svg" alt="">
      </div>
      <p>
-       You don't have any plans yet. Start saving now.
+       You currently have no on-going plans. Start saving now.
      </p>
      <a href="<?php echo base_url('wishlist/choose_plan'); ?>" class="btn btn-primary"><i class="fas fa-fw fa-plus-circle"></i></a>
    </div>

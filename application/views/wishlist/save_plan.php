@@ -14,10 +14,28 @@
                  <h6 class="m-0 font-weight-bold text-primary"><?php echo $id; ?></h6>
              </div>
              <div class="card-body">
-                 <p>Save amount: <?php echo $list_details['save_amount']; ?></p>
-                 <a class="btn btn-info" href="<?php echo base_url('wishlist/pay_plan/' . $id); ?>" style="text-decoration: none;">
-                     Proceed
-                 </a>
+                 <?php if ($list_details['category'] == 'strict') { ?>
+                     <p>Save amount: <?php echo $list_details['save_amount']; ?></p>
+                     <a class="btn btn-info" href="<?php echo base_url('wishlist/pay_plan_1/' . $id); ?>" style="text-decoration: none;">
+                         Proceed
+                     </a>
+                 <?php } else { ?>
+                     <form method="post" action="<?php echo base_url('wishlist/pay_plan_2/' . $id); ?>">
+                         <div class="form-group row">
+                             <label for="est_cost" class="col-sm-2 col-form-label">Save amount</label>
+                             <div class="col-sm-10">
+                                 <input type="text" name="est_cost" class="form-control" id="est_cost" placeholder="" value="">
+                             </div>
+                         </div>
+                         <div class="form-group row">
+                             <div class="col-sm-12">
+                                 <div class="text-right">
+                                     <button type="submit" class="btn btn-info" style="width: 30%;">Proceed</button>
+                                 </div>
+                             </div>
+                         </div>
+                     </form>
+                 <?php }; ?>
              </div>
          </div>
 

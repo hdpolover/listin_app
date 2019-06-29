@@ -14,8 +14,8 @@ class User extends CI_Controller
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
         //check if user has wishlists
-        $data['plans'] = $this->wishlist_model->getPlans();
-        if ($data['plans'] == false) {
+        $data['ongoing'] = $this->wishlist_model->getOngoingPlans();
+        if ($data['ongoing'] == false) {
             $this->load->view('user/index', $data);
         } else {
             $this->load->view('user/dashboard', $data);

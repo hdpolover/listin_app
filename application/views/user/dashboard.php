@@ -4,6 +4,12 @@
      <!-- Page Heading -->
      <div class="d-sm-flex align-items-center justify-content-between mb-4">
          <h1 class="h3 mb-0 text-gray-800"><?php echo $title; ?></h1>
+         <div class="card shadow">
+             <a class="btn btn-primary" href="<?php echo base_url('wishlist/choose_plan'); ?>">
+                 <i class="fas fa-plus fa-fw"></i>
+                 Create a new plan
+             </a>
+         </div>
      </div>
 
      <div class="container">
