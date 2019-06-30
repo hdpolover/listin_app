@@ -230,7 +230,7 @@ class Wishlist extends CI_Controller
             $this->wishlist_model->completedPlan($list_id, $currentDateTime);
 
             //update activity
-            $act = 'completed the plan for '.$list_details['title'];
+            $act = 'completed the plan for ' . $list_details['title'];
             $activity_data = array($act, $currentDateTime);
             $this->activity_model->insertActivity($activity_data);
 
@@ -246,8 +246,9 @@ class Wishlist extends CI_Controller
             );
             redirect('wishlist');
         } else {
+            $currentDateTime = $this->getExactTodayDate();
             //update activity
-            $act = 'made a deposit  for '.$list_details['title'];
+            $act = 'made a deposit  for ' . $list_details['title'];
             $activity_data = array($act, $currentDateTime);
             $this->activity_model->insertActivity($activity_data);
 
@@ -290,7 +291,7 @@ class Wishlist extends CI_Controller
             $this->wishlist_model->completedPlan($list_id, $currentDateTime);
 
             //update activity
-            $act = 'completed the plan for '.$list_details['title'];
+            $act = 'completed the plan for ' . $list_details['title'];
             $activity_data = array($act, $currentDateTime);
             $this->activity_model->insertActivity($activity_data);
 
@@ -307,7 +308,7 @@ class Wishlist extends CI_Controller
             redirect('wishlist');
         } else {
             //update activity
-            $act = 'made a deposit  for '.$list_details['title'];
+            $act = 'made a deposit  for ' . $list_details['title'];
             $activity_data = array($act, $currentDateTime);
             $this->activity_model->insertActivity($activity_data);
 

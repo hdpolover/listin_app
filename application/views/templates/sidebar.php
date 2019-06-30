@@ -39,6 +39,12 @@
       <span>My Wallet</span></a>
   </li>
 
+  <li class="nav-item ">
+    <a class="nav-link" href="<?php echo base_url('wallet') ?>">
+      <i class="fas fa-fw fa-history"></i>
+      <span>History</span></a>
+  </li>
+
   <!-- Divider -->
   <hr class="sidebar-divider">
 

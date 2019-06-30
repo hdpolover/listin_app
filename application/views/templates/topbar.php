@@ -49,7 +49,7 @@
 
         <!-- Nav Item - Alerts -->
         <li class="nav-item dropdown no-arrow mx-1">
-          <a class="nav-link dropdown-toggle" href="#" id="WalletDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link" href="<?php echo base_url('wallet') ?>"  aria-haspopup="true" aria-expanded="false">
             <!-- <i class="fas fa-bell fa-fw"></i> -->
             <div class="card mr+6 bg-primary text-white shadow">
               <div class="card-body" style="padding: .8vw;">
@@ -58,35 +58,6 @@
               </div>
             </div>
           </a>
-          <!-- Dropdown - Alerts -->
-          <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="WalletDropdown">
-            <h6 class="dropdown-header">
-              My Wallet
-            </h6>
-            <a class="dropdown-item d-flex align-items-center" href="#">
-              <div class="mr-3">
-                <div class="icon-circle bg-primary">
-                  <i class="fas fa-file-alt text-white"></i>
-                </div>
-              </div>
-              <div>
-                <div class="small text-gray-500">December 12, 2019</div>
-                <span class="font-weight-bold">A new monthly report is ready to download!</span>
-              </div>
-            </a>
-            <a class="dropdown-item d-flex align-items-center" href="#">
-              <div class="mr-3">
-                <div class="icon-circle bg-success">
-                  <i class="fas fa-donate text-white"></i>
-                </div>
-              </div>
-              <div>
-                <div class="small text-gray-500">December 7, 2019</div>
-                $290.29 has been deposited into your account!
-              </div>
-            </a>
-            <a class="text-center small text-gray-500 mb-0" href="#">See details</a>
-          </div>
         </li>
 
         <div class="topbar-divider d-none d-sm-block"></div>
