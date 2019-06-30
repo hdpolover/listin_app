@@ -23,7 +23,7 @@
                          </div>
                          <div class="text-center" style="padding-top: 1vw; margin-left: 7vw;">
                              <div class="custom-file">
-                                 <input type="file" class="custom-file-input" id="image" name="image">
+                                 <input type="file" class="custom-file-input" id="image" name="image" value="<?php echo $user['image']; ?>">
                                  <label class="custom-file-label" for="image">Choose file</label>
                              </div>
                          </div>

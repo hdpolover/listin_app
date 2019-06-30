@@ -126,6 +126,10 @@ class Wishlist extends CI_Controller
 
                 $this->wishlist_model->createPlan1($plan_data);
 
+                //update activity
+                $activity_data = array('created a new strict plan', $created_on);
+                $this->activity_model->insertActivity($activity_data);
+
                 $this->session->set_flashdata('message', '<div class ="alert alert-success" 
                 style="text-align-center" role ="alert">
             Congratulations! You successfully created a new strict plan.</div>');
@@ -170,6 +174,10 @@ class Wishlist extends CI_Controller
             );
 
             $this->wishlist_model->createPlan2($plan_data);
+
+            //update activity
+            $activity_data = array('created a new flexible plan', $created_on);
+            $this->activity_model->insertActivity($activity_data);
 
             $this->session->set_flashdata('message', '<div class ="alert alert-success" 
                 style="text-align-center" role ="alert">
@@ -221,6 +229,11 @@ class Wishlist extends CI_Controller
             //update plan status to "completed"
             $this->wishlist_model->completedPlan($list_id, $currentDateTime);
 
+            //update activity
+            $act = 'completed the plan for '.$list_details['title'];
+            $activity_data = array($act, $currentDateTime);
+            $this->activity_model->insertActivity($activity_data);
+
             //redirect to wishlist and show message
             $this->session->set_flashdata(
                 'message',
@@ -233,6 +246,11 @@ class Wishlist extends CI_Controller
             );
             redirect('wishlist');
         } else {
+            //update activity
+            $act = 'made a deposit  for '.$list_details['title'];
+            $activity_data = array($act, $currentDateTime);
+            $this->activity_model->insertActivity($activity_data);
+
             //redirect to wishlist and show message
             $this->session->set_flashdata(
                 'message',
@@ -271,6 +289,11 @@ class Wishlist extends CI_Controller
             //update plan status to "completed"
             $this->wishlist_model->completedPlan($list_id, $currentDateTime);
 
+            //update activity
+            $act = 'completed the plan for '.$list_details['title'];
+            $activity_data = array($act, $currentDateTime);
+            $this->activity_model->insertActivity($activity_data);
+
             //redirect to wishlist and show message
             $this->session->set_flashdata(
                 'message',
@@ -283,6 +306,11 @@ class Wishlist extends CI_Controller
             );
             redirect('wishlist');
         } else {
+            //update activity
+            $act = 'made a deposit  for '.$list_details['title'];
+            $activity_data = array($act, $currentDateTime);
+            $this->activity_model->insertActivity($activity_data);
+
             //redirect to wishlist and show message
             $this->session->set_flashdata(
                 'message',
@@ -302,6 +330,10 @@ class Wishlist extends CI_Controller
         $currentDateTime = $this->getExactTodayDate();
 
         $this->wishlist_model->cancelPlan($list_id, $currentDateTime);
+
+        //update activity
+        $activity_data = array('cancelled a plan', $currentDateTime);
+        $this->activity_model->insertActivity($activity_data);
 
         $this->session->set_flashdata(
             'message',
@@ -348,8 +380,8 @@ class Wishlist extends CI_Controller
     public function getWallet()
     {
         $wallet_value = $this->wallet_model->getWalletValue();
-        if ($wallet_value['sum(detail_amount)'] != null) {
-            return $wallet_value['sum(detail_amount)'];
+        if ($wallet_value['detail_amount'] != null) {
+            return $wallet_value['detail_amount'];
         } else {
             return "0,00";
         }

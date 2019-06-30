@@ -8,6 +8,8 @@ class User extends CI_Controller
     {
         $data['title'] = 'Dashboard';
         $data['user'] = $this->user_model->getUserData();
+        $data['activities'] = $this->activity_model->getRecentActivities();
+
         $data['wallet_value'] = $this->getWallet();
 
         $this->load->view('templates/header', $data);
@@ -18,7 +20,7 @@ class User extends CI_Controller
         if ($data['ongoing'] == false) {
             $this->load->view('user/index', $data);
         } else {
-            $this->load->view('user/dashboard', $data);
+            $this->load->view('user/index', $data);
         }
         $this->load->view('templates/footer');
     }
@@ -83,19 +85,36 @@ class User extends CI_Controller
                         unlink(FCPATH . 'assets/img/profile/' . $old_image);
                     }
                     $new_image = $this->upload->data('file_name');
+
+                    $data = array(
+                        'user_id' => $this->session->userdata('user_id'),
+                        'username' => $username,
+                        'email' => $email,
+                        'image' => $new_image
+                    );
+
+                    $this->user_model->updateUserProfile($data);
                 } else {
                     echo $this->upload->display_errors();
                 }
+                //if the user doesn't change their pp
+            } else {
+                $old_image = $data['user']['image'];
+
+                $data = array(
+                    'user_id' => $this->session->userdata('user_id'),
+                    'username' => $username,
+                    'email' => $email,
+                    'image' => $old_image
+                );
+
+                $this->user_model->updateUserProfile($data);
             }
 
-            $data = array(
-                'user_id' => $this->session->userdata('user_id'),
-                'username' => $username,
-                'email' => $email,
-                'image' => $new_image
-            );
-
-            $this->user_model->updateUserProfile($data);
+            //update activity
+            $currentDateTime = $this->getExactTodayDate();
+            $activity_data = array('updated your profile', $currentDateTime);
+            $this->activity_model->insertActivity($activity_data);
 
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Your profile has been updated!</div>');
             redirect('user/profile');
@@ -123,7 +142,7 @@ class User extends CI_Controller
             } else {
                 if ($current_password == $new_password) {
                     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">New password cannot be the same as current password!</div>');
-                    
+
                     redirect('user/edit_profile');
                 } else {
                     $password_hash = password_hash($new_password, PASSWORD_DEFAULT);
@@ -135,6 +154,12 @@ class User extends CI_Controller
 
                     $this->user_model->updateUserPassword($data);
 
+                    //update activity
+                    $currentDateTime = $this->getExactTodayDate();
+                    $activity_data = array('changed your password', $currentDateTime);
+                    $this->activity_model->insertActivity($activity_data);
+
+
                     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Password changed!</div>');
                     redirect('user/profile');
                 }
@@ -145,10 +170,20 @@ class User extends CI_Controller
     public function getWallet()
     {
         $wallet_value = $this->wallet_model->getWalletValue();
-        if ($wallet_value['sum(detail_amount)'] != null) {
-            return $wallet_value['sum(detail_amount)'];
+        if ($wallet_value['detail_amount'] != null) {
+            return $wallet_value['detail_amount'];
         } else {
             return "0,00";
         }
+    }
+
+    public function getExactTodayDate()
+    {
+        //get today's exact date
+        $offset = 7 * 60 * 60; //converting 7 hours to seconds. / (GMT+7)
+        $dateFormat = "Y-m-d H:i:s";
+        $now = gmdate($dateFormat, time() + $offset);
+
+        return $now;
     }
 }

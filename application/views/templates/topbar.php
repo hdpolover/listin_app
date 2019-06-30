@@ -85,7 +85,7 @@
                 $290.29 has been deposited into your account!
               </div>
             </a>
-            <a class="dropdown-item text-center small text-gray-500" href="#">See details</a>
+            <a class="text-center small text-gray-500 mb-0" href="#">See details</a>
           </div>
         </li>
 
