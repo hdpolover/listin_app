@@ -158,7 +158,7 @@ class Wishlist_model extends CI_Model
 
     public function getCurrentFlexibleTotal($list_id)
     {
-        $this->db->select('sum(detail_amount)');
+        $this->db->select_sum('detail_amount');
         $this->db->from('list_details');
         $this->db->join('lists', 'lists.list_id = list_details.list_id', 'left');
         $this->db->join('users', 'users.user_id = lists.user_id', 'left');

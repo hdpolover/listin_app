@@ -28,12 +28,14 @@
 
          <?php if ($ongoing == false) { ?>
            <div class="text-center">
-             <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="<?php echo base_url('assets/img/svg/'); ?>undraw_savings_hjfl.svg" alt="">
+             <div class="text-center">
+               <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="<?php echo base_url('assets/img/svg/'); ?>undraw_savings_hjfl.svg" alt="">
+             </div>
+             <p>
+               You currently have no on-going plans. Start saving now.
+             </p>
+             <a href="<?php echo base_url('wishlist/choose_plan'); ?>" class="btn btn-primary"><i class="fas fa-fw fa-plus-circle"></i></a>
            </div>
-           <p>
-             You currently have no on-going plans. Start saving now.
-           </p>
-           <a href="<?php echo base_url('wishlist/choose_plan'); ?>" class="btn btn-primary"><i class="fas fa-fw fa-plus-circle"></i></a>
          <?php } else { ?>
            <div class="card border-left-primary shadow h-100 py-2">
              <div class="card-body">

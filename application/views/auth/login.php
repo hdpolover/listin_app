@@ -26,10 +26,12 @@
 
                   <form class="user" method="post" action="<?php echo base_url('auth/login'); ?>">
                     <div class="form-group">
-                      <input type="email" name="email" class="form-control form-control-user" id="email" placeholder="Email" required>
+                      <input type="email" name="email" class="form-control form-control-user" id="email" placeholder="Email" value="<?php set_value('email'); ?>">
+                      <?php echo form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                     <div class="form-group">
-                      <input type="password" name="password" class="form-control form-control-user" id="password" placeholder="Password" required>
+                      <input type="password" name="password" class="form-control form-control-user" id="password" placeholder="Password">
+                      <?php echo form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                     <button type="submit" class="btn btn-primary btn-user btn-block">
                       Login

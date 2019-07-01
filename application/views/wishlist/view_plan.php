@@ -47,11 +47,11 @@
                <div class="col-lg-6" style="margin-bottom: 2vw;">
                  <div class="card bg-primary text-white shadow h-100 py-2">
                    <div class="card-body">
-                     <div class="container">
-                       <?php echo $value['title']; ?>
-                       <?php echo $value['created_on']; ?>
-                     </div>
-                     <br>
+                     <span class="text-right"><?php echo $value['category']; ?></span>
+                     <hr class="mb-1 mt-1">
+                     <?php echo $value['title']; ?>
+                     <?php echo $value['created_on']; ?>
+                     <br><br>
                      <div class="row">
                        <div class="col-lg-12">
                          <div class="text-right">
@@ -98,29 +98,32 @@
              </p>
            </div>
          <?php } else { ?>
-           <?php foreach ($completed as $value) { ?>
-             <a href="<?php echo base_url('wishlist/view_list_details/' . $value['list_id']); ?>" style="text-decoration: none;">
-               <div class="card bg-success text-white shadow h-100 py-2">
-                 <div class="card-body">
-                   <div class="row">
-                     <div class="container">
-                       <?php echo $value['title']; ?>
-                     </div>
-                   </div>
-                   <br>
-                   <div class="row">
-                     <div class="col-lg-12">
-                       <div class="text-right">
-                         <a class="btn btn-info" href="<?php echo base_url('wishlist/view_list_details/' . $value['list_id']); ?>" style="text-decoration: none;">
-                           View plan details
-                         </a>
+           <div class="row">
+             <?php foreach ($completed as $value) { ?>
+               <div class="col-lg-6" style="margin-bottom: 2vw;">
+                 <a href="<?php echo base_url('wishlist/view_list_details/' . $value['list_id']); ?>" style="text-decoration: none;">
+                   <div class="card bg-success text-white shadow h-100 py-2">
+                     <div class="card-body">
+                       <div class="container text-white">
+                         <?php echo $value['title']; ?>
+                       </div>
+                       <br>
+                       <div class="row">
+                         <div class="col-lg-12">
+                           <div class="text-right">
+                             <a class="btn btn-info" href="<?php echo base_url('wishlist/view_list_details/' . $value['list_id']); ?>" style="text-decoration: none;">
+                               View plan details
+                             </a>
+                           </div>
+                         </div>
                        </div>
                      </div>
                    </div>
-                 </div>
+                 </a>
                </div>
-             </a><br>
-           <?php }; ?>
+               <br>
+             <?php }; ?>
+           </div>
          <?php }; ?>
        </div>
      </div>
@@ -150,29 +153,32 @@
              </p>
            </div>
          <?php } else { ?>
-           <?php foreach ($cancelled as $value) { ?>
-             <a href="<?php echo base_url('wishlist/view_list_details/' . $value['list_id']); ?>" style="text-decoration: none;">
-               <div class="card bg-danger text-white shadow h-100 py-2">
-                 <div class="card-body">
-                   <div class="row">
-                     <div class="container">
-                       <?php echo $value['title']; ?>
-                     </div>
-                   </div>
-                   <br>
-                   <div class="row">
-                     <div class="col-lg-12">
-                       <div class="text-right">
-                         <a class="btn btn-info" href="<?php echo base_url('wishlist/view_list_details/' . $value['list_id']); ?>" style="text-decoration: none;">
-                           View plan details
-                         </a>
+           <div class="row">
+             <?php foreach ($cancelled as $value) { ?>
+               <div class="col-lg-6" style="margin-bottom: 2vw;">
+                 <a href="<?php echo base_url('wishlist/view_list_details/' . $value['list_id']); ?>" style="text-decoration: none;">
+                   <div class="card bg-danger text-white shadow h-100 py-2">
+                     <div class="card-body">
+                       <div class="container text-white">
+                         <?php echo $value['title']; ?>
+                       </div>
+                       <br>
+                       <div class="row">
+                         <div class="col-lg-12">
+                           <div class="text-right">
+                             <a class="btn btn-info" href="<?php echo base_url('wishlist/view_list_details/' . $value['list_id']); ?>" style="text-decoration: none;">
+                               View plan details
+                             </a>
+                           </div>
+                         </div>
                        </div>
                      </div>
                    </div>
-                 </div>
+                 </a>
                </div>
-             </a><br>
-           <?php }; ?>
+               <br>
+             <?php }; ?>
+           </div>
          <?php }; ?>
        </div>
 

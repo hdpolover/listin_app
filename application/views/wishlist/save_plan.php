@@ -7,7 +7,7 @@
      </div>
      <div class="container-fluid">
 
-         <?php echo $this->session->flashdata('message'); ?>
+         <?php echo $this->session->flashdata('invalidamount'); ?>
 
          <div class="card shadow mb-4">
              <div class="card-header py-3">

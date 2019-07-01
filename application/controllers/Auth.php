@@ -7,7 +7,7 @@ class Auth extends CI_Controller
     public function index()
     {
         $data['title'] = 'Login';
- 
+
         $this->load->view('templates/auth_header', $data);
         $this->load->view('auth/login');
         $this->load->view('templates/auth_footer');
@@ -15,11 +15,19 @@ class Auth extends CI_Controller
 
     public function login()
     {
-        $this->form_validation->set_rules('email', 'Email', 'trim|required');
-        $this->form_validation->set_rules('password', 'Password', 'trim|required');
+        $this->form_validation->set_rules('email', 'Email', 'required|trim', [
+            'required' => 'email is required!'
+        ]);
+        $this->form_validation->set_rules('password', 'Password', 'trim|required', [
+            'required' => 'password is required!'
+        ]);
 
         if ($this->form_validation->run() == false) {
-            redirect('auth');
+            $data['title'] = 'Login';
+
+            $this->load->view('templates/auth_header', $data);
+            $this->load->view('auth/login');
+            $this->load->view('templates/auth_footer');
         } else {
             // Get username
             $email = $this->input->post('email');
@@ -33,8 +41,9 @@ class Auth extends CI_Controller
                 if (password_verify($password, $user['password'])) {
                     // Create session
                     $user_data = array(
-                    'user_id' => $user['user_id'],
-                    'role_id' => $user['role_id']);
+                        'user_id' => $user['user_id'],
+                        'role_id' => $user['role_id']
+                    );
 
                     $this->session->set_userdata($user_data);
 
@@ -46,7 +55,7 @@ class Auth extends CI_Controller
             } else {
                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Login invalid!</div>');
                 redirect('auth');
-            }        
+            }
         }
     }
 
@@ -56,19 +65,25 @@ class Auth extends CI_Controller
 
         $this->form_validation->set_rules('fname', 'Full Name', 'required|trim');
         $this->form_validation->set_rules(
-            'email', 'Email', 'required|trim|valid_email|is_unique[users.email]', [
-            'is_unique' => 'This email has already been registered!'
+            'email',
+            'Email',
+            'required|trim|valid_email|is_unique[users.email]',
+            [
+                'is_unique' => 'This email has already been registered!'
             ]
         );
         $this->form_validation->set_rules(
-            'password1', 'Password', 'required|trim|min_length[5]|matches[password2]', [
-            'matches' => 'Passwords don\'t match!',
-            'min_length' => 'Password is too short!'
+            'password1',
+            'Password',
+            'required|trim|min_length[5]|matches[password2]',
+            [
+                'matches' => 'Passwords don\'t match!',
+                'min_length' => 'Password is too short!'
             ]
         );
         $this->form_validation->set_rules('password2', 'Repeat Password', 'required|trim|matches[password1]');
 
-        if($this->form_validation->run() == false) {
+        if ($this->form_validation->run() == false) {
             $this->load->view('templates/auth_header', $data);
             $this->load->view('auth/register');
             $this->load->view('templates/auth_footer');
@@ -94,6 +109,4 @@ class Auth extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">You have been logged out!</div>');
         redirect('auth');
     }
-    
-    
 }

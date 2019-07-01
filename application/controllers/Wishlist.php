@@ -44,6 +44,8 @@ class Wishlist extends CI_Controller
 
     public function choose_plan()
     {
+        //$ongoingTotal = count($this->wishlist_model->getOngoingPlans());
+
         $data['title'] = 'Choose a plan';
         $data['user'] = $this->user_model->getUserData();
         $data['wallet_value'] = $this->getWallet();
@@ -59,10 +61,16 @@ class Wishlist extends CI_Controller
     {
         $category = "strict";
 
-        $this->form_validation->set_rules('title', 'Title', 'required|trim');
+        $this->form_validation->set_rules('title', 'Title', 'required|trim', [
+            'required' => 'title is required!'
+        ]);
         $this->form_validation->set_rules('description', 'Description', 'trim');
-        $this->form_validation->set_rules('est_cost', 'Estimation Cost', 'required|trim');
-        $this->form_validation->set_rules('goal_date', 'Goal Date', 'required|trim');
+        $this->form_validation->set_rules('est_cost', 'Estimation Cost', 'required|trim', [
+            'required' => 'estimation cost is required!'
+        ]);
+        $this->form_validation->set_rules('goal_date', 'Goal Date', 'required|trim', [
+            'required' => 'goal date is required!'
+        ]);
 
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Create a new strict plan';
@@ -83,31 +91,64 @@ class Wishlist extends CI_Controller
 
             //omit Rp. from the input
             $est_cost = $this->convToNum(substr($this->input->post('est_cost'), 4));
-            $save_freq = $this->input->post('save_freq');
 
-            //get today's exact date
-            $created_on = $this->getExactTodayDate();
+            //check if the user input is valid
+            if ($est_cost > 0) {
+                $save_freq = $this->input->post('save_freq');
 
-            //get the interval between the input and today
-            $input_date = $this->input->post('goal_date');
-            $goal_date = date('Y-m-d', strtotime($input_date));
-            $day_interval = $this->getDayInterval($input_date);
+                //get today's exact date
+                $created_on = $this->getExactTodayDate();
 
-            //var_dump($created_on, $goal_date, $day_interval);
-            if ($save_freq == "option4") {
-                $freq_num = $this->input->post('freq_num');
-                $freq_period = $this->input->post('freq_period');
-                $save_freq = $freq_num * $freq_period;
-            }
+                //get the interval between the input and today
+                $input_date = $this->input->post('goal_date');
+                $goal_date = date('Y-m-d', strtotime($input_date));
+                $day_interval = $this->getDayInterval($input_date);
 
-            //count save amount
-            $total_save = $day_interval / $save_freq;
-            $save_amount = $est_cost / $total_save;
+                //var_dump($created_on, $goal_date, $day_interval);
+                if ($save_freq == "option4") {
+                    $freq_num = $this->input->post('freq_num');
+                    $freq_period = $this->input->post('freq_period');
+                    $save_freq = $freq_num * $freq_period;
+                }
 
-            //check if valid
-            if ($day_interval < $save_freq) {
-                $this->session->set_flashdata('message', '<div class ="alert alert-danger" role ="alert">
-            Saving frequency cannot be greater than the interval period. </div>');
+                //count save amount
+                $total_save = $day_interval / $save_freq;
+                $save_amount = round($est_cost / $total_save);
+
+                //check if valid
+                if ($day_interval < $save_freq) {
+                    $this->session->set_flashdata('message', '<div class ="alert alert-danger" role ="alert">
+                Saving frequency cannot be greater than the interval period. </div>');
+
+                    $data['title'] = 'Create a new strict plan';
+                    $data['user'] = $this->user_model->getUserData();
+                    $data['wallet_value'] = $this->getWallet();
+
+                    $this->load->view('templates/header', $data);
+                    $this->load->view('templates/sidebar', $data);
+                    $this->load->view('templates/topbar', $data);
+                    $this->load->view('wishlist/create_plan_1');
+                    $this->load->view('templates/footer');
+                } else {
+                    $plan_data = array(
+                        $title, $description, $est_cost, $goal_date,
+                        $created_on, $save_freq, $save_amount, $total_save, $category
+                    );
+
+                    $this->wishlist_model->createPlan1($plan_data);
+
+                    //update activity
+                    $activity_data = array('created a new strict plan', $created_on);
+                    $this->activity_model->insertActivity($activity_data);
+
+                    $this->session->set_flashdata('message', '<div class ="alert alert-success" 
+                    style="text-align-center" role ="alert">
+                Congratulations! You successfully created a new strict plan.</div>');
+                    redirect('wishlist');
+                }
+            } else {
+                $this->session->set_flashdata('invalidcost', '<div class ="alert alert-danger" role ="alert">
+                Estimated cost is invalid. Check it again. </div>');
 
                 $data['title'] = 'Create a new strict plan';
                 $data['user'] = $this->user_model->getUserData();
@@ -118,22 +159,6 @@ class Wishlist extends CI_Controller
                 $this->load->view('templates/topbar', $data);
                 $this->load->view('wishlist/create_plan_1');
                 $this->load->view('templates/footer');
-            } else {
-                $plan_data = array(
-                    $title, $description, $est_cost, $goal_date,
-                    $created_on, $save_freq, $save_amount, $total_save, $category
-                );
-
-                $this->wishlist_model->createPlan1($plan_data);
-
-                //update activity
-                $activity_data = array('created a new strict plan', $created_on);
-                $this->activity_model->insertActivity($activity_data);
-
-                $this->session->set_flashdata('message', '<div class ="alert alert-success" 
-                style="text-align-center" role ="alert">
-            Congratulations! You successfully created a new strict plan.</div>');
-                redirect('wishlist');
             }
         }
     }
@@ -142,7 +167,9 @@ class Wishlist extends CI_Controller
     {
         $category = "flexible";
 
-        $this->form_validation->set_rules('title', 'Title', 'required|trim');
+        $this->form_validation->set_rules('title', 'Title', 'required|trim', [
+            'required' => 'title is required!'
+        ]);
         $this->form_validation->set_rules('description', 'Description', 'trim');
         $this->form_validation->set_rules('est_cost', 'Estimation Cost', 'required|trim');
 
@@ -166,23 +193,38 @@ class Wishlist extends CI_Controller
             //omit Rp. from the input
             $est_cost = $this->convToNum(substr($this->input->post('est_cost'), 4));
 
-            //get today's exact date
-            $created_on = $this->getExactTodayDate();
+            if ($est_cost > 0) {
+                //get today's exact date
+                $created_on = $this->getExactTodayDate();
 
-            $plan_data = array(
-                $title, $description, $est_cost, $created_on, $category
-            );
+                $plan_data = array(
+                    $title, $description, $est_cost, $created_on, $category
+                );
 
-            $this->wishlist_model->createPlan2($plan_data);
+                $this->wishlist_model->createPlan2($plan_data);
 
-            //update activity
-            $activity_data = array('created a new flexible plan', $created_on);
-            $this->activity_model->insertActivity($activity_data);
+                //update activity
+                $activity_data = array('created a new flexible plan', $created_on);
+                $this->activity_model->insertActivity($activity_data);
 
-            $this->session->set_flashdata('message', '<div class ="alert alert-success" 
+                $this->session->set_flashdata('message', '<div class ="alert alert-success" 
                 style="text-align-center" role ="alert">
-            Congratulations! You successfully created a new flexible plan.</div>');
-            redirect('wishlist');
+                Congratulations! You successfully created a new flexible plan.</div>');
+                redirect('wishlist');
+            } else {
+                $this->session->set_flashdata('invalidcost', '<div class ="alert alert-danger" role ="alert">
+                Estimated cost is invalid. Check it again. </div>');
+
+                $data['title'] = 'Create a new flexible plan';
+                $data['user'] = $this->user_model->getUserData();
+                $data['wallet_value'] = $this->getWallet();
+
+                $this->load->view('templates/header', $data);
+                $this->load->view('templates/sidebar', $data);
+                $this->load->view('templates/topbar', $data);
+                $this->load->view('wishlist/create_plan_2');
+                $this->load->view('templates/footer');
+            }
         }
     }
 
@@ -273,57 +315,68 @@ class Wishlist extends CI_Controller
         //data needed for payment
         $data['list_id'] = $list_details['list_id'];
         $data['detail_amount'] = $this->convToNum(substr($this->input->post('est_cost'), 4));
-        $data['payment_date'] = $this->getExactTodayDate();
 
-        $this->wishlist_model->insertListPayment($data);
+        if ($data['detail_amount'] > 0) {
+            $data['payment_date'] = $this->getExactTodayDate();
 
-        //get current flexible plan total
-        $result = $this->wishlist_model->getCurrentFlexibleTotal($list_id);
-        $currentTotal = $result['sum(detail_amount)'];
-        //get estimated cost
-        $estimated_cost = $list_details['est_cost'];
+            $this->wishlist_model->insertListPayment($data);
 
-        if ($currentTotal == $estimated_cost || $currentTotal >= $estimated_cost) {
-            //get current datetime
-            $currentDateTime = $this->getExactTodayDate();
+            //get current flexible plan total
+            $result = $this->wishlist_model->getCurrentFlexibleTotal($list_id);
+            $currentTotal = $result['detail_amount'];
+            //get estimated cost
+            $estimated_cost = $list_details['est_cost'];
 
-            //update plan status to "completed"
-            $this->wishlist_model->completedPlan($list_id, $currentDateTime);
+            if ($currentTotal == $estimated_cost || $currentTotal >= $estimated_cost) {
+                //get current datetime
+                $currentDateTime = $this->getExactTodayDate();
 
-            //update activity
-            $act = 'completed the plan for ' . $list_details['title'];
-            $activity_data = array($act, $currentDateTime);
-            $this->activity_model->insertActivity($activity_data);
+                //update plan status to "completed"
+                $this->wishlist_model->completedPlan($list_id, $currentDateTime);
 
-            //redirect to wishlist and show message
-            $this->session->set_flashdata(
-                'message',
-                '<div class ="alert alert-success" style="text-align-center" role ="alert">
-                Congratulations. Your saving plan has been completed!
-                <a href="wishlist/view_list_details/' . $list_id . '">
-                See details.
-                </a>
-                </div>'
-            );
-            redirect('wishlist');
+                //update activity
+                $act = 'completed the plan for ' . $list_details['title'];
+                $activity_data = array($act, $currentDateTime);
+                $this->activity_model->insertActivity($activity_data);
+
+                //redirect to wishlist and show message
+                $this->session->set_flashdata(
+                    'message',
+                    '<div class ="alert alert-success" style="text-align-center" role ="alert">
+                    Congratulations. Your saving plan has been completed!
+                    <a href="wishlist/view_list_details/' . $list_id . '">
+                    See details.
+                    </a>
+                    </div>'
+                );
+                redirect('wishlist');
+            } else {
+                //update activity
+                $currentDateTime = $this->getExactTodayDate();
+                $act = 'made a deposit  for ' . $list_details['title'];
+                $activity_data = array($act, $currentDateTime);
+                $this->activity_model->insertActivity($activity_data);
+
+                //redirect to wishlist and show message
+                $this->session->set_flashdata(
+                    'message',
+                    '<div class ="alert alert-success" style="text-align-center" role ="alert">
+                    Payment successful!
+                    <a href="wishlist/view_list_details/' . $list_id . '">
+                    See details.
+                    </a>
+                    </div>'
+                );
+                redirect('wishlist');
+            }
         } else {
-            //update activity
-            $currentDateTime = $this->getExactTodayDate();
-            $act = 'made a deposit  for ' . $list_details['title'];
-            $activity_data = array($act, $currentDateTime);
-            $this->activity_model->insertActivity($activity_data);
-
-            //redirect to wishlist and show message
             $this->session->set_flashdata(
-                'message',
-                '<div class ="alert alert-success" style="text-align-center" role ="alert">
-                Payment successful!
-                <a href="wishlist/view_list_details/' . $list_id . '">
-                See details.
-                </a>
+                'invalidamount',
+                '<div class ="alert alert-danger" style="text-align-center" role ="alert">
+                Saving amount is invalid. Check it again. 
                 </div>'
             );
-            redirect('wishlist');
+            redirect('wishlist/save_plan/' . $list_id);
         }
     }
 
@@ -353,9 +406,13 @@ class Wishlist extends CI_Controller
     {
         //remove Rp.
         $sub = filter_var($input, FILTER_SANITIZE_NUMBER_INT);
-        $divide = $sub / 100;
+        if (is_numeric($sub)) {
+            $divide = $sub / 100;
 
-        return $divide;
+            return $divide;
+        } else {
+            return 0;
+        }
     }
 
     public function getDayInterval($date)

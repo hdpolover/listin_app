@@ -14,13 +14,14 @@
        <!-- Card Body -->
        <div class="card-body">
 
-         <?php echo $this->session->flashdata('message'); ?>
+         <?php echo $this->session->flashdata('invalidcost'); ?>
 
          <form method="post" action="<?= base_url('wishlist/create_plan_2'); ?>">
            <div class="form-group row">
              <label for="title" class="col-sm-2 col-form-label">Title</label>
              <div class="col-sm-10">
                <input type="text" name="title" class="form-control" id="title" placeholder="" value="<?= set_value('title'); ?>">
+               <?php echo form_error('title', '<small class="text-danger pl-1">', '</small>'); ?>
              </div>
            </div>
            <div class="form-group row">

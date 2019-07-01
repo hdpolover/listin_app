@@ -40,4 +40,34 @@ class Activity_model extends CI_Model
             return false;
         }
     }
+
+    public function getWalletDepositActivities()
+    {
+        $this->db->like('activity', 'deposit', 'both');
+        $this->db->order_by('done_on', 'desc');
+        $this->db->where('user_id', $this->session->userdata('user_id'));
+
+        $result = $this->db->get('activities');
+
+        if ($result->num_rows() > 0) {
+            return $result->result_array();
+        } else {
+            return false;
+        }
+    }
+
+    public function getWalletWithdrawActivities()
+    {
+        $this->db->like('activity', 'withdraw', 'both');
+        $this->db->order_by('done_on', 'desc');
+        $this->db->where('user_id', $this->session->userdata('user_id'));
+
+        $result = $this->db->get('activities');
+
+        if ($result->num_rows() > 0) {
+            return $result->result_array();
+        } else {
+            return false;
+        }
+    }
 }
