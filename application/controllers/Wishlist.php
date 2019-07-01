@@ -308,6 +308,7 @@ class Wishlist extends CI_Controller
             redirect('wishlist');
         } else {
             //update activity
+            $currentDateTime = $this->getExactTodayDate();
             $act = 'made a deposit  for ' . $list_details['title'];
             $activity_data = array($act, $currentDateTime);
             $this->activity_model->insertActivity($activity_data);

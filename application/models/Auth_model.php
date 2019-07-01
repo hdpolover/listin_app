@@ -8,7 +8,6 @@ class Auth_model extends CI_Model
         // User data array
         $data = array(
             'username' => $this->input->post('fname'),
-            'name' => $this->input->post('fname'),
             'email' => $this->input->post('email'),
             'password' => $enc_password,
             'image' => 'default.jpg',

@@ -42,30 +42,33 @@
              </p>
            </div>
          <?php } else { ?>
-           <?php foreach ($ongoing as $value) { ?>
-             <div class="card bg-primary text-white shadow h-100 py-2">
-               <div class="card-body">
-                 <div class="row">
-                   <div class="container">
-                     <?php echo $value['title']; ?>
-                   </div>
-                 </div>
-                 <br>
-                 <div class="row">
-                   <div class="col-lg-12">
-                     <div class="text-right">
-                       <a class="btn btn-info" href="<?php echo base_url('wishlist/save_plan/' . $value['list_id']); ?>" style="text-decoration: none;">
-                         Save now </a>
-                       <a class="btn btn-info" href="<?php echo base_url('wishlist/view_list_details/' . $value['list_id']); ?>" style="text-decoration: none;">
-                         View plan details
-                       </a>
+           <div class="row">
+             <?php foreach ($ongoing as $value) { ?>
+               <div class="col-lg-6" style="margin-bottom: 2vw;">
+                 <div class="card bg-primary text-white shadow h-100 py-2">
+                   <div class="card-body">
+                     <div class="container">
+                       <?php echo $value['title']; ?>
+                       <?php echo $value['created_on']; ?>
+                     </div>
+                     <br>
+                     <div class="row">
+                       <div class="col-lg-12">
+                         <div class="text-right">
+                           <a class="btn btn-info" href="<?php echo base_url('wishlist/save_plan/' . $value['list_id']); ?>" style="text-decoration: none;">
+                             Save now </a>
+                           <a class="btn btn-info" href="<?php echo base_url('wishlist/view_list_details/' . $value['list_id']); ?>" style="text-decoration: none;">
+                             View plan details
+                           </a>
+                         </div>
+                       </div>
                      </div>
                    </div>
                  </div>
                </div>
-             </div>
-             <br>
-           <?php }; ?>
+               <br>
+             <?php }; ?>
+           </div>
          <?php }; ?>
        </div>
      </div>
