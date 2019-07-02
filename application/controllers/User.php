@@ -3,6 +3,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class User extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        is_logged_in();
+    }
 
     public function index()
     {
@@ -21,6 +26,8 @@ class User extends CI_Controller
 
     public function profile()
     {
+        // $data = $this->user_model->getUserDataDetails();
+        // var_dump($data);
         $data['title'] = 'My Profile';
         $data['user'] = $this->user_model->getUserData();
         $data['wallet_value'] = $this->getWallet();
@@ -161,13 +168,27 @@ class User extends CI_Controller
         }
     }
 
+    public function history()
+    {
+        $data['title'] = 'History';
+        $data['user'] = $this->user_model->getUserData();
+        $data['wallet_value'] = $this->getWallet();
+        $data['recent_activities'] = $this->activity_model->getRecentActivities();
+        
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('user/history', $data);
+        $this->load->view('templates/footer');
+    }
+
     public function getWallet()
     {
-        $wallet_value = $this->wallet_model->getWalletValue();
-        if ($wallet_value['detail_amount'] != null) {
-            return $wallet_value['detail_amount'];
+        $wallet_value = $this->wallet_model->getUserWalletValue();
+        if ($wallet_value['amount'] != null) {
+            return $wallet_value['amount'];
         } else {
-            return "0,00";
+            return 0;
         }
     }
 

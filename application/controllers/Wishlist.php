@@ -3,6 +3,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Wishlist extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        is_logged_in();
+    }
 
     public function index()
     {
@@ -235,6 +240,7 @@ class Wishlist extends CI_Controller
         $data['wallet_value'] = $this->getWallet();
         $data['id'] = $list_id;
         $data['list_details'] = $this->wishlist_model->getListDetails($list_id);
+        $data['list_title'] = $data['list_details'] ['title'];
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -256,8 +262,14 @@ class Wishlist extends CI_Controller
 
         //data needed for updating transaction total
         $data['trans_needed'] = $list_details['trans_needed'];
-
         $this->wishlist_model->updateTransNeeded($data);
+
+        //update wallet amount
+        $this->wallet_model->updateDeposit(
+            $list_details['user_id'],
+            $this->getWallet(),
+            $data['detail_amount']
+        );
 
         //check if plan completed
         $list_details = $this->wishlist_model->getListDetails($list_id);
@@ -320,6 +332,13 @@ class Wishlist extends CI_Controller
             $data['payment_date'] = $this->getExactTodayDate();
 
             $this->wishlist_model->insertListPayment($data);
+
+            //update wallet amount
+            $this->wallet_model->updateDeposit(
+                $list_details['user_id'],
+                $this->getWallet(),
+                $data['detail_amount']
+            );
 
             //get current flexible plan total
             $result = $this->wishlist_model->getCurrentFlexibleTotal($list_id);
@@ -438,11 +457,11 @@ class Wishlist extends CI_Controller
 
     public function getWallet()
     {
-        $wallet_value = $this->wallet_model->getWalletValue();
-        if ($wallet_value['detail_amount'] != null) {
-            return $wallet_value['detail_amount'];
+        $wallet_value = $this->wallet_model->getUserWalletValue();
+        if ($wallet_value['amount'] != null) {
+            return $wallet_value['amount'];
         } else {
-            return "0,00";
+            return 0;
         }
     }
 }

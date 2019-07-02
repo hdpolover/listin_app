@@ -52,6 +52,7 @@ class Wishlist_model extends CI_Model
 
     public function getOngoingPlans()
     {
+        $this->db->order_by('list_id', 'desc');
         $this->db->where('status', 'on_going');
         $this->db->where('user_id', $this->session->userdata('user_id'));
 
@@ -66,6 +67,7 @@ class Wishlist_model extends CI_Model
 
     public function getCompletedPlans()
     {
+        $this->db->order_by('complete_or_cancel_date', 'desc');
         $this->db->where('status', 'completed');
         $this->db->where('user_id', $this->session->userdata('user_id'));
 
@@ -80,6 +82,7 @@ class Wishlist_model extends CI_Model
 
     public function getCancelledPlans()
     {
+        $this->db->order_by('complete_or_cancel_date', 'desc');
         $this->db->where('status', 'cancelled');
         $this->db->where('user_id', $this->session->userdata('user_id'));
 
@@ -125,6 +128,18 @@ class Wishlist_model extends CI_Model
             'tr_date' => $data['payment_date'],
             'detail_amount' => $data['detail_amount'],
             'action' => "deposit",
+            'list_id' => $data['list_id']
+        );
+
+        $this->db->insert('list_details', $data);
+    }
+
+    public function withdrawListPayment($data)
+    {
+        $data = array(
+            'tr_date' => $data['tr_date'],
+            'detail_amount' => $data['withdraw_amount'],
+            'action' => "withdraw",
             'list_id' => $data['list_id']
         );
 

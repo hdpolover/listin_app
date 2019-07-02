@@ -58,7 +58,7 @@ class Activity_model extends CI_Model
 
     public function getWalletWithdrawActivities()
     {
-        $this->db->like('activity', 'withdraw', 'both');
+        $this->db->like('activity', 'withdrew', 'both');
         $this->db->order_by('done_on', 'desc');
         $this->db->where('user_id', $this->session->userdata('user_id'));
 

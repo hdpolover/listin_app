@@ -11,11 +11,11 @@
 
          <div class="card shadow mb-4">
              <div class="card-header py-3">
-                 <h6 class="m-0 font-weight-bold text-primary"><?php echo $id; ?></h6>
+                 <h6 class="m-0 font-weight-bold text-primary"><?php echo $list_title; ?></h6>
              </div>
              <div class="card-body">
                  <?php if ($list_details['category'] == 'strict') { ?>
-                     <p>Save amount: <?php echo $list_details['save_amount']; ?></p>
+                     <p>Save amount: Rp. <?php echo number_format($list_details['save_amount'], 0, '', '.'); ?>,00</p>
                      <a class="btn btn-info" href="<?php echo base_url('wishlist/pay_plan_1/' . $id); ?>" style="text-decoration: none;">
                          Proceed
                      </a>

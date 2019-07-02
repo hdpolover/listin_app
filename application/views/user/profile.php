@@ -15,7 +15,7 @@
   <?php echo $this->session->flashdata('message'); ?>
 
   <div class="row">
-    <div class="col-lg-6">
+    <div class="col">
       <div class="card shadow mb-4">
         <div class="card-body">
           <div class="row">
@@ -29,13 +29,13 @@
             <h4 class="text-dark"><?php echo $user['username']; ?></h4>
           </div>
           <div class="container">
-            <div class="form-group row" style="font-size: 1.5vw;">
+            <div class="form-group row mb-0" style="font-size: 1.5vw;">
               <label for="username" class="col-lg-4 col-form-label">Username</label>
               <div class="col-lg-8">
                 <input type="text" class="form-control" id="username" style="border:none; background-color: white; font-size: 1.5vw;" value="<?php echo $user['username']; ?>" disabled>
               </div>
             </div>
-            <div class="form-group row" style="font-size: 1.5vw;">
+            <div class="form-group row mb-0" style="font-size: 1.5vw;">
               <label for="email" class="col-lg-4 col-form-label">Email</label>
               <div class="col-lg-8">
                 <input type="text" class="form-control" id="email" style="border:none; background-color: white; font-size: 1.5vw;" value="<?php echo $user['email']; ?>" disabled>
@@ -51,16 +51,13 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-6">
+    <!-- <div class="col-lg-6">
       <div class="card shadow mb-4">
         <div class="card-body">
-          <h4 class="small font-weight-bold">Server Migration <span class="float-right">20%</span></h4>
-          <div class="progress mb-4">
-            <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
+          <p></p>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 
 

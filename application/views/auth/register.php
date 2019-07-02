@@ -19,6 +19,7 @@
               <form class="user" method="post" action="<?php echo base_url('auth/register'); ?>">
                 <div class="form-group">
                   <input type="text" class="form-control form-control-user" id="fname" name="fname" placeholder="Full Name">
+                  <?php echo form_error('fname', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
                 <div class="form-group">
                   <input type="email" class="form-control form-control-user" id="email" name="email" placeholder="Email Address" value="<?php echo set_value('email'); ?>">

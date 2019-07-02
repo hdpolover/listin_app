@@ -45,7 +45,7 @@
                                  <div class="form-group row">
                                      <label for="esti_cost" class="col-sm-4 col-form-label">Estimated Cost</label>
                                      <div class="col-sm-8">
-                                         <input type="text" name="esti_cost" class="form-control" id="esti_cost" placeholder="Rp. <?php echo $list_details['est_cost']; ?>" disabled>
+                                         <input type="text" name="esti_cost" class="form-control" id="esti_cost" placeholder="Rp. <?php echo number_format($list_details['est_cost'], 0, '', '.'); ?>,00" disabled>
                                      </div>
                                  </div>
                                  <div class="form-group row">
@@ -73,7 +73,7 @@
                                  <div class="form-group row">
                                      <label for="save_amount" class="col-sm-4 col-form-label">Saving Amount</label>
                                      <div class="col-sm-8">
-                                         <input type="text" name="save_amount" class="form-control" id="save_amount" placeholder="Rp. <?php echo $list_details['save_amount']; ?>" disabled>
+                                         <input type="text" name="save_amount" class="form-control" id="save_amount" placeholder="Rp. <?php echo number_format($list_details['save_amount'], 0, '', '.'); ?>,00" disabled>
                                      </div>
                                  </div>
                                  <div class="text-align">
@@ -97,7 +97,7 @@
                                  <div class="form-group row">
                                      <label for="esti_cost" class="col-sm-4 col-form-label">Estimated Cost</label>
                                      <div class="col-sm-8">
-                                         <input type="text" name="esti_cost" class="form-control" id="esti_cost" placeholder="Rp. <?php echo $list_details['est_cost']; ?>" disabled>
+                                         <input type="text" name="esti_cost" class="form-control" id="esti_cost" placeholder="Rp. <?php echo number_format($list_details['est_cost'], 0, '', '.'); ?>,00" disabled>
                                      </div>
                                  </div>
                              </form>
@@ -149,28 +149,30 @@
                          </p>
                      </div>
                  <?php } else { ?>
-                     <table class="table table-striped">
-                         <thead>
-                             <tr>
-                                 <th scope="col">No. </th>
-                                 <th scope="col">Transaction Date</th>
-                                 <th scope="col">Detail Amount</th>
-                                 <th scope="col">Action</th>
-                             </tr>
-                         </thead>
-                         <tbody>
-                             <?php $index = 1; ?>
-                             <?php foreach ($list_id_details as $value) { ?>
+                     <div style="overflow-y: scroll; height:200px;">
+                         <table class="table table-striped">
+                             <thead>
                                  <tr>
-                                     <th scope="row"><?php echo $index; ?></th>
-                                     <td><?php echo $value['tr_date']; ?></td>
-                                     <td>Rp. <?php echo $value['detail_amount']; ?></td>
-                                     <td><?php echo $value['action']; ?></td>
-                                     <?php $index++; ?>
+                                     <th scope="col">No. </th>
+                                     <th scope="col">Transaction Date</th>
+                                     <th scope="col">Detail Amount</th>
+                                     <th scope="col">Action</th>
                                  </tr>
-                             <?php }; ?>
-                         </tbody>
-                     </table>
+                             </thead>
+                             <tbody>
+                                 <?php $index = 1; ?>
+                                 <?php foreach ($list_id_details as $value) { ?>
+                                     <tr>
+                                         <th scope="row"><?php echo $index; ?></th>
+                                         <td><?php echo $value['tr_date']; ?></td>
+                                         <td>Rp. <?php echo number_format($value['detail_amount'], 0, '', '.'); ?>,00</td>
+                                         <td><?php echo $value['action']; ?></td>
+                                         <?php $index++; ?>
+                                     </tr>
+                                 <?php }; ?>
+                             </tbody>
+                         </table>
+                     </div>
                  <?php }; ?>
              </div>
          </div>

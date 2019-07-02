@@ -11,39 +11,29 @@
              </a>
          </div>
      </div>
+
+     <?php echo $this->session->flashdata('message'); ?>
+
      <div class="row">
          <div class="col-lg-6">
              <div class="card border-left-primary shadow py-2">
                  <div class="card-body">
                      <div class="row no-gutters align-items-center">
                          <div class="text-center">
-                             <h2 class="mb-0 font-weight-bold text-primary">
+                             <h1 class="mb-0 font-weight-bold text-primary">
                                  <i class="fas fa-money-check-alt fa-fw"></i>
-                                 Rp. <?php echo $wallet_value; ?></h2>
+                                 Rp. <?php echo number_format($wallet_value, 0, '', '.'); ?>,00
+                             </h1>
                          </div>
                      </div>
-                     <hr>
-                     <?php if ($wallet_details == false) { ?>
-                         <div class="row no-gutters align-items-center">
-                             <div class="container text-center">
-                                 <div class="text-center">
-                                     <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="<?php echo base_url('assets/img/svg/'); ?>undraw_wallet_aym5.svg" alt="">
-                                 </div>
-                                 <p>
-                                     No deposits yet. Made some now.
-                                 </p>
-                             </div>
-                         </div>
-                     <?php } else { ?>
-                         <div class="row">
-                             <?php foreach ($wallet_details as $value) { ?>
-                                 <div class="container">
-                                     <?php echo $value['title']; ?> =
-                                     <?php echo $value['detail_amount']; ?>
-                                 </div>
-                             <?php }; ?>
-                         </div>
-                     <?php }; ?>
+                 </div>
+             </div>
+             <br><br>
+             <div class="row no-gutters align-items-center">
+                 <div class="container text-center">
+                     <div class="text-center">
+                         <img class="img-fluid px-2 px-4 mt-5 mb-2" style="width: 30rem;" src="<?php echo base_url('assets/img/svg/'); ?>undraw_wallet_aym5.svg" alt="">
+                     </div>
                  </div>
              </div>
          </div>
@@ -81,8 +71,7 @@
                              <div class="row">
                                  <?php foreach ($deposit_activities as $value) { ?>
                                      <div class="container">
-                                         <?php echo $value['done_on']; ?> =
-                                         <?php echo $value['activity']; ?>
+                                         <p class="mb-1"><span class="m-0 font-weight-bold text-primary">- <?php echo $value['done_on']; ?></span> You <?php echo $value['activity']; ?>.</p>
                                      </div>
                                  <?php }; ?>
                              </div>
@@ -102,16 +91,16 @@
                          <?php } else { ?>
                              <h6 class="m-2 font-weight-bold text-primary">Withdraw activities</h6>
                              <div class="row">
-                                 <?php foreach ($dwithdraw_activities as $value) { ?>
+                                 <?php foreach ($withdraw_activities as $value) { ?>
                                      <div class="container">
-                                         <?php echo $value['done_on']; ?> =
-                                         <?php echo $value['activity']; ?>
+                                         <p class="mb-1"><span class="m-0 font-weight-bold text-primary">- <?php echo $value['done_on']; ?></span> You <?php echo $value['activity']; ?>.</p>
                                      </div>
                                  <?php }; ?>
                              </div>
                          <?php }; ?>
                      <?php }; ?>
                  </div>
+                 <a class="dropdown-item text-center small text-gray-500" href="<?php echo base_url('user/history'); ?>">See more</a>
              </div>
 
          </div>

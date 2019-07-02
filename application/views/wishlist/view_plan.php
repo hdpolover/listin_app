@@ -49,9 +49,8 @@
                    <div class="card-body">
                      <span class="text-right"><?php echo $value['category']; ?></span>
                      <hr class="mb-1 mt-1">
-                     <?php echo $value['title']; ?>
-                     <?php echo $value['created_on']; ?>
-                     <br><br>
+                     <p><?php echo $value['title']; ?></p>
+                     <p class="text-right">Estimated cost: Rp. <?php echo number_format($value['est_cost'], 0, '', '.'); ?>,00</p>
                      <div class="row">
                        <div class="col-lg-12">
                          <div class="text-right">
@@ -104,10 +103,12 @@
                  <a href="<?php echo base_url('wishlist/view_list_details/' . $value['list_id']); ?>" style="text-decoration: none;">
                    <div class="card bg-success text-white shadow h-100 py-2">
                      <div class="card-body">
-                       <div class="container text-white">
-                         <?php echo $value['title']; ?>
+                       <div class="text-white">
+                         <span class="text-right"><?php echo $value['category']; ?></span>
+                         <hr class="mb-1 mt-1">
+                         <p><?php echo $value['title']; ?></p>
+                         <p class="text-right">Estimated cost: Rp. <?php echo number_format($value['est_cost'], 0, '', '.'); ?>,00</p>
                        </div>
-                       <br>
                        <div class="row">
                          <div class="col-lg-12">
                            <div class="text-right">
@@ -159,10 +160,12 @@
                  <a href="<?php echo base_url('wishlist/view_list_details/' . $value['list_id']); ?>" style="text-decoration: none;">
                    <div class="card bg-danger text-white shadow h-100 py-2">
                      <div class="card-body">
-                       <div class="container text-white">
-                         <?php echo $value['title']; ?>
+                       <div class="text-white">
+                         <span class="text-right"><?php echo $value['category']; ?></span>
+                         <hr class="mb-1 mt-1">
+                         <p><?php echo $value['title']; ?></p>
+                         <p class="text-right">Estimated cost: Rp. <?php echo number_format($value['est_cost'], 0, '', '.'); ?>,00</p>
                        </div>
-                       <br>
                        <div class="row">
                          <div class="col-lg-12">
                            <div class="text-right">

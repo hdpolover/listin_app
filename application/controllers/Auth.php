@@ -63,13 +63,17 @@ class Auth extends CI_Controller
     {
         $data['title'] = 'Registration';
 
-        $this->form_validation->set_rules('fname', 'Full Name', 'required|trim');
+        $this->form_validation->set_rules('fname', 'Full Name', 'required|trim', [
+            'required' => 'full name is required!'
+        ]);
         $this->form_validation->set_rules(
             'email',
             'Email',
             'required|trim|valid_email|is_unique[users.email]',
             [
-                'is_unique' => 'This email has already been registered!'
+                'is_unique' => 'this email has already been registered!',
+                'required' => 'email is required!',
+                'valid_email' => 'email is invalid!'
             ]
         );
         $this->form_validation->set_rules(
@@ -77,11 +81,14 @@ class Auth extends CI_Controller
             'Password',
             'required|trim|min_length[5]|matches[password2]',
             [
-                'matches' => 'Passwords don\'t match!',
-                'min_length' => 'Password is too short!'
+                'matches' => 'passwords don\'t match!',
+                'min_length' => 'password is too short!',
+                'required' => 'password is required!'
             ]
         );
-        $this->form_validation->set_rules('password2', 'Repeat Password', 'required|trim|matches[password1]');
+        $this->form_validation->set_rules('password2', 'Repeat Password', 'required|trim|matches[password1]',[
+            'required' => 'repeat password is required!'
+        ]);
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/auth_header', $data);
@@ -90,8 +97,20 @@ class Auth extends CI_Controller
         } else {
             // Encrypt password
             $enc_password = password_hash($this->input->post('password1'), PASSWORD_DEFAULT);
+            $email = $this->input->post('email');
 
-            $this->auth_model->register($enc_password);
+            $register_data = array(
+                'username' => $this->input->post('fname'),
+                'email' => $email,
+                'password' => $enc_password
+            );
+
+            $this->auth_model->register($register_data);
+
+            //initialize wallet
+            $user_id = $this->auth_model->getUserId($email);
+            
+            $this->wallet_model->initUserWallet($user_id['user_id']);
 
             // Set message
             $this->session->set_flashdata('message', '<div class="alert alert-info" role="alert">You are now registered and can log in</div>');

@@ -24,6 +24,31 @@
   <!-- Custom styles for this page -->
   <link href="<?php echo base_url('assets/'); ?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+  <style>
+    .tableFixHead {
+      overflow-y: scroll;
+      height: 100px;
+    }
+
+    .tableFixHead thead th {
+      position: sticky;
+      top: 0;
+    }
+
+    /* Just common table stuff. Really. */
+    table {
+      width: 100%;
+    }
+
+    th,
+    td {
+      padding: 8px 16px;
+    }
+
+    th {
+      background: #eee;
+    }
+  </style>
 </head>
 
 <body id="page-top">

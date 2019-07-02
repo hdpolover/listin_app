@@ -40,7 +40,7 @@
   </li>
 
   <li class="nav-item ">
-    <a class="nav-link" href="<?php echo base_url('wallet') ?>">
+    <a class="nav-link" href="<?php echo base_url('user/history') ?>">
       <i class="fas fa-fw fa-history"></i>
       <span>History</span></a>
   </li>
