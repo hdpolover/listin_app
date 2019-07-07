@@ -15,7 +15,8 @@
   <?php echo $this->session->flashdata('message'); ?>
 
   <div class="row">
-    <div class="col">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
       <div class="card shadow mb-4">
         <div class="card-body">
           <div class="row">
@@ -51,6 +52,7 @@
         </div>
       </div>
     </div>
+    <div class="col-lg-3"></div>
     <!-- <div class="col-lg-6">
       <div class="card shadow mb-4">
         <div class="card-body">

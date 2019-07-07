@@ -14,6 +14,7 @@
           <div class="col-lg-7">
             <div class="p-5">
               <div class="text-center">
+                <img class="img-fluid px-2 px-sm-4 mt-0 mb-1" src="<?php echo base_url('assets/img/'); ?>logo.png" alt="">
                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
               </div>
               <form class="user" method="post" action="<?php echo base_url('auth/register'); ?>">

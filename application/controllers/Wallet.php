@@ -14,7 +14,6 @@ class Wallet extends CI_Controller
         $data['title'] = 'My Wallet';
         $data['user'] = $this->user_model->getUserData();
         $data['wallet_value'] = $this->getWallet();
-        $data['wallet_details'] = $this->wallet_model->getWalletAmountDetails();
         $data['deposit_activities'] = $this->activity_model->getWalletDepositActivities();
         $data['withdraw_activities'] = $this->activity_model->getWalletWithdrawActivities();
 
@@ -28,6 +27,7 @@ class Wallet extends CI_Controller
     public function withdraw()
     {
         $data['wallet_details'] = $this->wallet_model->getWalletAmountDetails();
+
         $data['title'] = 'My Wallet / Withdraw';
         $data['user'] = $this->user_model->getUserData();
         $data['wallet_value'] = $this->getWallet();
@@ -46,7 +46,8 @@ class Wallet extends CI_Controller
 
         $data['wallet_details'] = $this->wallet_model->getWalletAmountDetailsOnStatus($status_choice);
         $data['wallet_withdrawn'] = $this->wallet_model->getWalletAmountDetailsOnStatusWithdraw($status_choice);
-        
+
+        //var_dump($data['wallet_details'], $data['wallet_withdrawn']);
         $data['title'] = 'My Wallet / Withdraw';
         $data['user'] = $this->user_model->getUserData();
         $data['wallet_value'] = $this->getWallet();
@@ -61,8 +62,14 @@ class Wallet extends CI_Controller
 
     public function confirm_withdraw($list_id)
     {
-        $data['wallet_id_details'] = $this->wallet_model->getWalletIdDetails($list_id);
+        $data['wallet_id_details'] = $this->wallet_model->getWalletIdDetailsDeposit($list_id);
+        $data['wallet_id_details_withdraw'] = $this->wallet_model->getWalletIdDetailsWithdraw($list_id);
 
+        if ($data['wallet_id_details_withdraw']['detail_amount'] == null) {
+            $data['wallet_id_details_withdraw']['detail_amount'] = 0;
+        }
+
+        //var_dump($data['wallet_id_details_withdraw'], $data['wallet_id_details']);
         if ($data['wallet_id_details']['status'] == 'on_going' && $data['wallet_id_details']['category'] == 'strict') {
             $this->session->set_flashdata(
                 'message',
@@ -86,11 +93,15 @@ class Wallet extends CI_Controller
 
     public function ok_withdraw($list_id)
     {
-        $data['wallet_id_details'] = $this->wallet_model->getWalletIdDetails($list_id);
+        $data['wallet_id_details'] = $this->wallet_model->getWalletIdDetailsDeposit($list_id);
+        $data['wallet_id_details_withdraw'] = $this->wallet_model->getWalletIdDetailsWithdraw($list_id);
 
+        if ($data['wallet_id_details_withdraw']['detail_amount'] == null) {
+            $data['wallet_id_details_withdraw']['detail_amount'] = 0;
+        }
 
         $saving_goal = $data['wallet_id_details']['est_cost'];
-        $saved_total = $data['wallet_id_details']['detail_amount'];
+        $saved_total = $data['wallet_id_details']['detail_amount'] - $data['wallet_id_details_withdraw']['detail_amount'];
         $withdraw_amount = $this->convToNum(substr($this->input->post('est_cost'), 4));
 
         if ($withdraw_amount > 0) {

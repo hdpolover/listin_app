@@ -25,13 +25,13 @@
                  <div class="form-group row">
                      <label for="saving_goal" class="col-lg-5 col-form-label">Estimated cost</label>
                      <div class="col-lg-7">
-                         <input type="text" name="saving_goal" class="form-control" id="saving_goal" placeholder="" value="Rp. <?php echo number_format($wallet_id_details['est_cost'], 0, '', '.'); ?>,00" disabled>
+                         <input type="text" name="saving_goal" class="form-control" id="saving_goal" placeholder="" value="Rp. <?php echo number_format($wallet_id_details['est_cost'], 0, '', '.'); ?>" disabled>
                      </div>
                  </div>
                  <div class="form-group row">
                      <label for="saved_total" class="col-lg-5 col-form-label">Saved total</label>
                      <div class="col-lg-7">
-                         <input type="text" name="saved_total" class="form-control" id="saved_total" placeholder="" value="Rp. <?php echo number_format($wallet_id_details['detail_amount'], 0, '', '.'); ?>,00" disabled>
+                         <input type="text" name="saved_total" class="form-control" id="saved_total" placeholder="" value="Rp. <?php echo number_format(($wallet_id_details['detail_amount'] - $wallet_id_details_withdraw['detail_amount']), 0, '', '.'); ?>" disabled>
                      </div>
                  </div>
                  <div class="form-group row">

@@ -48,7 +48,7 @@
                              <tr>
                                  <th scope="col">No. </th>
                                  <th scope="col">Title</th>
-                                 <th scope="col">Saved amount</th>
+                                 <th scope="col">Category</th>
                                  <th scope="col">Action</th>
                              </tr>
                          </thead>
@@ -58,7 +58,7 @@
                                  <tr>
                                      <th scope="row"><?php echo $index; ?></th>
                                      <td><?php echo $value['title']; ?></td>
-                                     <td>Rp. <?php echo number_format($value['detail_amount'], 0, '', '.'); ?>,00</td>
+                                     <td><?php echo $value['category']; ?></td>
                                      <?php $index++; ?>
                                      <td><a class="btn btn-success" href="<?php echo base_url('wallet/confirm_withdraw/' . $value['list_id']); ?>">
                                              Choose

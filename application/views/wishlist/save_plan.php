@@ -15,7 +15,7 @@
              </div>
              <div class="card-body">
                  <?php if ($list_details['category'] == 'strict') { ?>
-                     <p>Save amount: Rp. <?php echo number_format($list_details['save_amount'], 0, '', '.'); ?>,00</p>
+                     <p>Save amount: Rp. <?php echo number_format($list_details['save_amount'], 0, '', '.'); ?></p>
                      <a class="btn btn-info" href="<?php echo base_url('wishlist/pay_plan_1/' . $id); ?>" style="text-decoration: none;">
                          Proceed
                      </a>

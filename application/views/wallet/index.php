@@ -22,7 +22,7 @@
                          <div class="text-center">
                              <h1 class="mb-0 font-weight-bold text-primary">
                                  <i class="fas fa-money-check-alt fa-fw"></i>
-                                 Rp. <?php echo number_format($wallet_value, 0, '', '.'); ?>,00
+                                 Rp. <?php echo number_format($wallet_value, 0, '', '.'); ?>
                              </h1>
                          </div>
                      </div>

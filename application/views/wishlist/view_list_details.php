@@ -31,6 +31,12 @@
                  <?php }; ?>
              </div>
 
+             <?php if (($list_details['est_cost'] - $currentTotal) < 0) {
+                    $needed = 0;
+                } else {
+                    $needed = $list_details['est_cost'] - $currentTotal;
+                }; ?>
+
              <div class="card-body">
                  <?php if ($list_details['category'] == 'strict') { ?>
                      <div class="row">
@@ -45,7 +51,7 @@
                                  <div class="form-group row">
                                      <label for="esti_cost" class="col-sm-4 col-form-label">Estimated Cost</label>
                                      <div class="col-sm-8">
-                                         <input type="text" name="esti_cost" class="form-control" id="esti_cost" placeholder="Rp. <?php echo number_format($list_details['est_cost'], 0, '', '.'); ?>,00" disabled>
+                                         <input type="text" name="esti_cost" class="form-control" id="esti_cost" placeholder="Rp. <?php echo number_format($list_details['est_cost'], 0, '', '.'); ?>" disabled>
                                      </div>
                                  </div>
                                  <div class="form-group row">
@@ -54,26 +60,32 @@
                                          <input type="text" name="goal_dat" class="form-control" id="goal_dat" placeholder="<?php echo $list_details['goal_date']; ?> (<?php echo $day_interval; ?> day(s) left)" disabled>
                                      </div>
                                  </div>
-                             </form>
-                         </div>
-                         <div class="col-lg-6">
-                             <form>
                                  <div class="form-group row">
                                      <label for="save_freq" class="col-sm-4 col-form-label">Saving Frequency</label>
                                      <div class="col-sm-8">
                                          <input type="text" name="save_freq" class="form-control" id="save_freq" placeholder="Every <?php echo $list_details['save_freq']; ?> day(s)" disabled>
                                      </div>
                                  </div>
+                             </form>
+                         </div>
+                         <div class="col-lg-6">
+                             <form>
                                  <div class="form-group row">
                                      <label for="sav_needed" class="col-sm-4 col-form-label">Saving Needed</label>
                                      <div class="col-sm-8">
-                                         <input type="text" name="save_needed" class="form-control" id="save_needed" placeholder="<?php echo $list_details['trans_needed']; ?> more times" disabled>
+                                         <input type="text" name="save_needed" class="form-control" id="save_needed" placeholder="<?php echo $list_details['trans_needed']; ?> more time(s)" disabled>
                                      </div>
                                  </div>
                                  <div class="form-group row">
                                      <label for="save_amount" class="col-sm-4 col-form-label">Saving Amount</label>
                                      <div class="col-sm-8">
-                                         <input type="text" name="save_amount" class="form-control" id="save_amount" placeholder="Rp. <?php echo number_format($list_details['save_amount'], 0, '', '.'); ?>,00" disabled>
+                                         <input type="text" name="save_amount" class="form-control" id="save_amount" placeholder="Rp. <?php echo number_format($list_details['save_amount'], 0, '', '.'); ?>" disabled>
+                                     </div>
+                                 </div>
+                                 <div class="form-group row">
+                                     <label for="cost_needed" class="col-sm-4 col-form-label">Saving amount needed</label>
+                                     <div class="col-sm-8">
+                                         <input type="text" name="cost_needed" class="form-control" id="cost_needed" placeholder="Rp. <?php echo number_format($needed, 0, '', '.'); ?>" disabled>
                                      </div>
                                  </div>
                                  <div class="text-align">
@@ -97,13 +109,19 @@
                                  <div class="form-group row">
                                      <label for="esti_cost" class="col-sm-4 col-form-label">Estimated Cost</label>
                                      <div class="col-sm-8">
-                                         <input type="text" name="esti_cost" class="form-control" id="esti_cost" placeholder="Rp. <?php echo number_format($list_details['est_cost'], 0, '', '.'); ?>,00" disabled>
+                                         <input type="text" name="esti_cost" class="form-control" id="esti_cost" placeholder="Rp. <?php echo number_format($list_details['est_cost'], 0, '', '.'); ?>" disabled>
                                      </div>
                                  </div>
                              </form>
                          </div>
                          <div class="col-lg-6">
                              <form>
+                                 <div class="form-group row">
+                                     <label for="cost_needed" class="col-sm-4 col-form-label">Saving amount needed</label>
+                                     <div class="col-sm-8">
+                                         <input type="text" name="cost_needed" class="form-control" id="cost_needed" placeholder="Rp. <?php echo number_format($needed, 0, '', '.'); ?>" disabled>
+                                     </div>
+                                 </div>
                                  <div class="text-align">
                                      <h6>
                                          Created on <?php echo $list_details['created_on']; ?>
@@ -165,7 +183,7 @@
                                      <tr>
                                          <th scope="row"><?php echo $index; ?></th>
                                          <td><?php echo $value['tr_date']; ?></td>
-                                         <td>Rp. <?php echo number_format($value['detail_amount'], 0, '', '.'); ?>,00</td>
+                                         <td>Rp. <?php echo number_format($value['detail_amount'], 0, '', '.'); ?></td>
                                          <td><?php echo $value['action']; ?></td>
                                          <?php $index++; ?>
                                      </tr>

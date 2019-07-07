@@ -67,6 +67,30 @@ class Wallet_model extends CI_Model
         }
     }
 
+    public function getWalletAmountDetailsW()
+    {
+        $this->db->select('lists.list_id');
+        $this->db->select('lists.title');
+        $this->db->select('lists.est_cost');
+        $this->db->select('lists.status');
+        $this->db->select('lists.category');
+        $this->db->select_sum('list_details.detail_amount');
+        $this->db->from('list_details');
+        $this->db->join('lists', 'lists.list_id = list_details.list_id', 'left');
+        $this->db->join('users', 'users.user_id = lists.user_id', 'left');
+        $this->db->where('users.user_id', $this->session->userdata('user_id'));
+        $this->db->where('list_details.action', 'withdraw');
+        $this->db->group_by('lists.list_id');
+
+        $result = $this->db->get();
+
+        if ($result->num_rows() > 0) {
+            return $result->result_array();
+        } else {
+            return false;
+        }
+    }
+
     public function getWalletAmountDetails()
     {
         $this->db->select('lists.list_id');
@@ -80,6 +104,7 @@ class Wallet_model extends CI_Model
         $this->db->join('users', 'users.user_id = lists.user_id', 'left');
         $this->db->where('users.user_id', $this->session->userdata('user_id'));
         $this->db->where('list_details.action', 'deposit');
+        $this->db->order_by('lists.list_id', 'desc');
         $this->db->group_by('lists.list_id');
 
         $result = $this->db->get();
@@ -91,7 +116,8 @@ class Wallet_model extends CI_Model
         }
     }
 
-    public function getWalletIdDetails($list_id)
+
+    public function getWalletIdDetailsDeposit($list_id)
     {
         $this->db->select('lists.list_id');
         $this->db->select('lists.title');
@@ -104,6 +130,25 @@ class Wallet_model extends CI_Model
         $this->db->join('users', 'users.user_id = lists.user_id', 'left');
         $this->db->where('users.user_id', $this->session->userdata('user_id'));
         $this->db->where('list_details.action', 'deposit');
+        $this->db->where('lists.list_id', $list_id);
+
+        $result = $this->db->get();
+
+        if ($result->num_rows() == 1) {
+            return $result->row_array();
+        } else {
+            return false;
+        }
+    }
+
+    public function getWalletIdDetailsWithdraw($list_id)
+    {
+        $this->db->select_sum('list_details.detail_amount');
+        $this->db->from('list_details');
+        $this->db->join('lists', 'lists.list_id = list_details.list_id', 'left');
+        $this->db->join('users', 'users.user_id = lists.user_id', 'left');
+        $this->db->where('users.user_id', $this->session->userdata('user_id'));
+        $this->db->where('list_details.action', 'withdraw');
         $this->db->where('lists.list_id', $list_id);
 
         $result = $this->db->get();

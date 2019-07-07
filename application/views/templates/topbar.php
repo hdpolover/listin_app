@@ -22,7 +22,7 @@
             <div class="card mr+6 bg-primary text-white shadow">
               <div class="card-body" style="padding: .8vw;">
                 <i class="fas fa-coins fa-fw"></i>
-                Rp. <?php echo number_format($wallet_value, 0, '', '.'); ?>,00
+                Rp. <?php echo number_format($wallet_value, 0, '', '.'); ?>
               </div>
             </div>
           </a>

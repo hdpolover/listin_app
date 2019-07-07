@@ -34,6 +34,24 @@ class Wishlist extends CI_Controller
         $data['wallet_value'] = $this->getWallet();
         //list data
         $data['list_details'] = $this->wishlist_model->getListDetails($list_id);
+        if ($data['list_details']['category'] == 'flexible') {
+            //get current flexible plan total
+            $deposit = $this->wishlist_model->getCurrentFlexibleTotalDeposit($list_id);
+            $withdraw = $this->wishlist_model->getCurrentFlexibleTotalWithdraw($list_id);
+
+            if ($withdraw['detail_amount'] == null) {
+                $withdraw_amount = 0;
+            } else {
+                $withdraw_amount = $withdraw['detail_amount'];
+            }
+
+            $data['currentTotal'] = $deposit['detail_amount'] - $withdraw_amount;
+        } else {
+            $deposit = $this->wishlist_model->getCurrentStrictTotal($list_id);
+
+            $data['currentTotal'] = $deposit['detail_amount'];
+        }
+
         //data for history
         $data['list_id_details'] = $this->wishlist_model->getListIdDetails($list_id);
 
@@ -122,7 +140,7 @@ class Wishlist extends CI_Controller
 
                 //check if valid
                 if ($day_interval < $save_freq) {
-                    $this->session->set_flashdata('message', '<div class ="alert alert-danger" role ="alert">
+                    $this->session->set_flashdata('invalidcost', '<div class ="alert alert-danger" role ="alert">
                 Saving frequency cannot be greater than the interval period. </div>');
 
                     $data['title'] = 'Create a new strict plan';
@@ -240,7 +258,7 @@ class Wishlist extends CI_Controller
         $data['wallet_value'] = $this->getWallet();
         $data['id'] = $list_id;
         $data['list_details'] = $this->wishlist_model->getListDetails($list_id);
-        $data['list_title'] = $data['list_details'] ['title'];
+        $data['list_title'] = $data['list_details']['title'];
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -341,8 +359,18 @@ class Wishlist extends CI_Controller
             );
 
             //get current flexible plan total
-            $result = $this->wishlist_model->getCurrentFlexibleTotal($list_id);
-            $currentTotal = $result['detail_amount'];
+            $deposit = $this->wishlist_model->getCurrentFlexibleTotalDeposit($list_id);
+            $withdraw = $this->wishlist_model->getCurrentFlexibleTotalWithdraw($list_id);
+
+            if ($withdraw['detail_amount'] == null) {
+                $withdraw_amount = 0;
+            } else {
+                $withdraw_amount = $withdraw['detail_amount'];
+            }
+
+            $currentTotal = $deposit['detail_amount'] - $withdraw_amount;
+
+            //var_dump($currentTotal);
             //get estimated cost
             $estimated_cost = $list_details['est_cost'];
 

@@ -171,7 +171,7 @@ class Wishlist_model extends CI_Model
         $this->db->update('lists');
     }
 
-    public function getCurrentFlexibleTotal($list_id)
+    public function getCurrentStrictTotal($list_id)
     {
         $this->db->select_sum('detail_amount');
         $this->db->from('list_details');
@@ -179,7 +179,45 @@ class Wishlist_model extends CI_Model
         $this->db->join('users', 'users.user_id = lists.user_id', 'left');
         $this->db->where('users.user_id', $this->session->userdata('user_id'));
         $this->db->where('lists.list_id', $list_id);
-        $this->db->where('lists.category', 'flexible');
+        $this->db->where('lists.category', 'strict');
+
+        $result = $this->db->get();
+
+        if ($result->num_rows() == 1) {
+            return $result->row_array();
+        } else {
+            return false;
+        }
+    }
+
+    public function getCurrentFlexibleTotalDeposit($list_id)
+    {
+        $this->db->select_sum('detail_amount');
+        $this->db->from('list_details');
+        $this->db->join('lists', 'lists.list_id = list_details.list_id', 'left');
+        $this->db->join('users', 'users.user_id = lists.user_id', 'left');
+        $this->db->where('users.user_id', $this->session->userdata('user_id'));
+        $this->db->where('lists.list_id', $list_id);
+        $this->db->where('list_details.action', 'deposit');
+
+        $result = $this->db->get();
+
+        if ($result->num_rows() == 1) {
+            return $result->row_array();
+        } else {
+            return false;
+        }
+    }
+
+    public function getCurrentFlexibleTotalWithdraw($list_id)
+    {
+        $this->db->select_sum('detail_amount');
+        $this->db->from('list_details');
+        $this->db->join('lists', 'lists.list_id = list_details.list_id', 'left');
+        $this->db->join('users', 'users.user_id = lists.user_id', 'left');
+        $this->db->where('users.user_id', $this->session->userdata('user_id'));
+        $this->db->where('lists.list_id', $list_id);
+        $this->db->where('list_details.action', 'withdraw');
 
         $result = $this->db->get();
 

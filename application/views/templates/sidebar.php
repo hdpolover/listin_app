@@ -2,11 +2,11 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
   <!-- Sidebar - Brand -->
-  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url('user'); ?>">
-    <div class="sidebar-brand-icon rotate-n-15">
-      <i class="fas fw fa-money-check-alt"></i>
+  <a class="sidebar-brand d-flex align-items-center" href="<?php echo base_url('user'); ?>">
+    <div class="sidebar-brand-icon">
+      <img class="img-fluid px-3 mt-0 mb-1" src="<?php echo base_url('assets/img/'); ?>logobrand.png" alt="logo">
     </div>
-    <div class="sidebar-brand-text mx-3">Listin</div>
+    <div class="sidebar-brand-text mx-3 ml-2">Listin</div>
   </a>
 
   <!-- Divider -->

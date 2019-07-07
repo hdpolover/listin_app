@@ -50,7 +50,7 @@
                      <span class="text-right"><?php echo $value['category']; ?></span>
                      <hr class="mb-1 mt-1">
                      <p><?php echo $value['title']; ?></p>
-                     <p class="text-right">Estimated cost: Rp. <?php echo number_format($value['est_cost'], 0, '', '.'); ?>,00</p>
+                     <p class="text-right">Estimated cost: Rp. <?php echo number_format($value['est_cost'], 0, '', '.'); ?></p>
                      <div class="row">
                        <div class="col-lg-12">
                          <div class="text-right">
@@ -107,7 +107,7 @@
                          <span class="text-right"><?php echo $value['category']; ?></span>
                          <hr class="mb-1 mt-1">
                          <p><?php echo $value['title']; ?></p>
-                         <p class="text-right">Estimated cost: Rp. <?php echo number_format($value['est_cost'], 0, '', '.'); ?>,00</p>
+                         <p class="text-right">Estimated cost: Rp. <?php echo number_format($value['est_cost'], 0, '', '.'); ?></p>
                        </div>
                        <div class="row">
                          <div class="col-lg-12">
@@ -164,7 +164,7 @@
                          <span class="text-right"><?php echo $value['category']; ?></span>
                          <hr class="mb-1 mt-1">
                          <p><?php echo $value['title']; ?></p>
-                         <p class="text-right">Estimated cost: Rp. <?php echo number_format($value['est_cost'], 0, '', '.'); ?>,00</p>
+                         <p class="text-right">Estimated cost: Rp. <?php echo number_format($value['est_cost'], 0, '', '.'); ?></p>
                        </div>
                        <div class="row">
                          <div class="col-lg-12">

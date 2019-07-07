@@ -6,7 +6,7 @@
          <h1 class="h3 mb-0 text-gray-800"><?php echo $title; ?></h1>
      </div>
 
-     <?php echo $this->session->flashdata('message'); ?>
+     <?php echo $this->session->flashdata('msg'); ?>
 
      <div class="row">
          <div class="col-lg-6">
@@ -32,12 +32,14 @@
                          <label for="username" class="col-sm-4 col-form-label">Username</label>
                          <div class="col-sm-8">
                              <input type="text" name="username" class="form-control" id="username" value="<?php echo $user['username']; ?>">
+                             <?php echo form_error('username', '<small class="text-danger pl-0">', '</small>'); ?>
                          </div>
                      </div>
                      <div class="form-group row">
                          <label for="email" class="col-sm-4 col-form-label">Email</label>
                          <div class="col-sm-8">
                              <input type="text" name="email" class="form-control" id="email" value="<?php echo $user['email']; ?>">
+                             <?php echo form_error('email', '<small class="text-danger pl-0">', '</small>'); ?>
                          </div>
                      </div>
                      <div class="text-align-right">
@@ -52,30 +54,32 @@
          <div class="col-lg-6">
              <div class="card shadow mb-4">
                  <div class="card-body">
-                     <form class="user" method="post" action="<?php echo base_url('user/change_password'); ?>">
-                         <div class="form-group row">
-                             <label for="current_pass" class="col-sm-4 col-form-label">Current Password</label>
-                             <div class="col-sm-8">
-                                 <input type="password" name="current_pass" class="form-control" id="current_pass">
-                             </div>
+                     <?= form_open_multipart('user/change_password'); ?>
+                     <div class="form-group row">
+                         <label for="current_pass" class="col-sm-4 col-form-label">Current Password</label>
+                         <div class="col-sm-8">
+                             <input type="password" name="current_pass" class="form-control" id="current_pass">
+                             <?php echo form_error('current_pass', '<small class="text-danger pl-0">', '</small>'); ?>
                          </div>
-                         <div class="form-group row">
-                             <label for="new_pass1" class="col-sm-4 col-form-label">New Password</label>
-                             <div class="col-sm-8">
-                                 <input type="password" name="new_pass1" class="form-control" id="new_pass1">
-                             </div>
+                     </div>
+                     <div class="form-group row">
+                         <label for="new_pass1" class="col-sm-4 col-form-label">New Password</label>
+                         <div class="col-sm-8">
+                             <input type="password" name="new_pass1" class="form-control" id="new_pass1">
+                             <?php echo form_error('new_pass1', '<small class="text-danger pl-0">', '</small>'); ?>
                          </div>
-                         <div class="form-group row">
-                             <label for="new_pass2" class="col-sm-4 col-form-label">Confirm New Password</label>
-                             <div class="col-sm-8">
-                                 <input type="password" name="new_pass2" class="form-control" id="new_pass2">
-                             </div>
+                     </div>
+                     <div class="form-group row">
+                         <label for="new_pass2" class="col-sm-4 col-form-label">Confirm New Password</label>
+                         <div class="col-sm-8">
+                             <input type="password" name="new_pass2" class="form-control" id="new_pass2">
                          </div>
-                         <div class="text-align-right">
-                             <button type="submit" class="btn btn-primary btn-user btn-block">
-                                 Change password
-                             </button>
-                         </div>
+                     </div>
+                     <div class="text-align-right">
+                         <button type="submit" class="btn btn-primary btn-user btn-block">
+                             Change password
+                         </button>
+                     </div>
                      </form>
                  </div>
              </div>

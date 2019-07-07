@@ -19,6 +19,7 @@
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
+                  <img class="img-fluid px-2 px-sm-4 mt-0 mb-1" src="<?php echo base_url('assets/img/'); ?>logo.png" alt="">
                     <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                   </div>
 
