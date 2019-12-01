@@ -1,0 +1,38 @@
+[debug] [2019-11-18T01:10:29.767Z] ----------------------------------------------------------------------
+[debug] [2019-11-18T01:10:29.769Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\hendr\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2019-11-18T01:10:29.769Z] CLI Version:   7.7.0
+[debug] [2019-11-18T01:10:29.769Z] Platform:      win32
+[debug] [2019-11-18T01:10:29.769Z] Node Version:  v10.16.0
+[debug] [2019-11-18T01:10:29.770Z] Time:          Mon Nov 18 2019 08:10:29 GMT+0700 (Western Indonesia Time)
+[debug] [2019-11-18T01:10:29.770Z] ----------------------------------------------------------------------
+[debug] [2019-11-18T01:10:29.770Z] 
+[debug] [2019-11-18T01:10:29.777Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-11-18T01:10:29.777Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\xampp\htdocs\listin_app
+
+Before we get started, keep in mind:
+
+  * You are currently outside your home directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2019-11-18T01:10:58.518Z] Error: kill ENOSYS
+    at process.kill (internal/process/per_thread.js:198:13)
+    at process.listener (C:\Users\hendr\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\signal-exit\index.js:95:15)
+    at process.emit (events.js:198:13)
+[error] 
+[error] Error: An unexpected error has occurred.
